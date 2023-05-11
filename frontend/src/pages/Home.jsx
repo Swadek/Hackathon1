@@ -20,8 +20,18 @@ function Home({
   setCityDataSearch,
   cultureIsLoaded,
   setCultureIsLoaded,
+  savedCulture,
+  setSavedCulture,
+  startX,
+  setStartX,
+  endX,
+  setEndX,
 }) {
   function RandomActivities() {
+    setCultureRandom(Math.floor(Math.random() * culture.length));
+  }
+  function SaveActivities() {
+    setSavedCulture([...savedCulture, culture[cultureRandom]]);
     setCultureRandom(Math.floor(Math.random() * culture.length));
   }
   useEffect(() => {
@@ -35,7 +45,7 @@ function Home({
       })
       .catch((error) => console.error(error.message));
   }, [communeSelectedAdd]);
-  console.log(culture, cityDataSearch);
+  console.log(culture, cityDataSearch, savedCulture);
   return (
     <div>
       <Weather cityDataSearch={cityDataSearch} />
@@ -56,8 +66,17 @@ function Home({
       </div>
       {cultureIsLoaded ? (
         <div>
-          <Activities culture={culture[cultureRandom]} />
+          <Activities
+            culture={culture[cultureRandom]}
+            startX={startX}
+            setStartX={setStartX}
+            endX={endX}
+            setEndX={setEndX}
+            RandomActivities={() => RandomActivities()}
+            SaveActivities={() => SaveActivities()}
+          />
           <button onClick={() => RandomActivities()}>Next</button>
+          <button onClick={() => SaveActivities()}>Save</button>
         </div>
       ) : (
         <p>Loading</p>
