@@ -1,7 +1,12 @@
 import React from "react";
+import Weather from "../components/weather/Weather";
 
 function Home() {
-  return <div>coucou 1</div>;
+  return (
+    <div>
+      <Weather />
+    </div>
+  );
 }
 
 export default Home;
