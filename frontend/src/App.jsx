@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Home from "./pages/Home";
 import "./reset.css";
 import "./App.css";
+import "./CSS/activityCard.css";
 
 function App() {
   const [culture, setCulture] = useState();
