@@ -11,6 +11,8 @@ function App() {
   ]);
   const [cityDataSearch, setCityDataSearch] = useState([31555]);
   const [cultureIsLoaded, setCultureIsLoaded] = useState(false);
+  const [randomActivity, setRandomActivity] = useState();
+
   return (
     <div className="App">
       <Home
@@ -20,6 +22,8 @@ function App() {
         setCommuneSelectedAdd={setCommuneSelectedAdd}
         cityDataSearch={cityDataSearch}
         setCityDataSearch={setCityDataSearch}
+        randomActivity={randomActivity}
+        setRandomActivity={setRandomActivity}
         cultureRandom={cultureRandom}
         setCultureRandom={setCultureRandom}
         cultureIsLoaded={cultureIsLoaded}
