@@ -1,5 +1,6 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable react/prop-types */
 import React, { useEffect } from "react";
-import PropTypes from "prop-types";
 import axios from "axios";
 
 function Home({ culture, setCulture }) {
@@ -11,13 +12,8 @@ function Home({ culture, setCulture }) {
       .then((data) => setCulture(data))
       .catch((error) => console.error(error.message));
   }, []);
-  console.log(culture);
+  console.warn(culture);
   return <div>coucou 1</div>;
 }
 
 export default Home;
-
-Home.propTypes = {
-  culture: PropTypes.shape.isRequired,
-  setCulture: PropTypes.func.isRequired,
-};
