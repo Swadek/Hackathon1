@@ -11,6 +11,7 @@ function App() {
   ]);
   const [cityDataSearch, setCityDataSearch] = useState([31555]);
   const [cultureIsLoaded, setCultureIsLoaded] = useState(false);
+  const [foreCast, setForeCast] = useState();
   return (
     <div className="App">
       <Home
@@ -24,6 +25,8 @@ function App() {
         setCultureRandom={setCultureRandom}
         cultureIsLoaded={cultureIsLoaded}
         setCultureIsLoaded={setCultureIsLoaded}
+        foreCast={foreCast}
+        setForeCast={setForeCast}
       />
     </div>
   );
