@@ -8,7 +8,7 @@ function Activities({ culture }) {
   const { fields } = culture;
   console.log(culture);
   return (
-    <Card>
+    <Card className="cardActivity">
       <p className="p-card-title">{fields.domaine}</p>
       <p className="p-card-subtitle">{fields.type_equipement_ou_lieu}</p>
       <p className="card-p1">{fields.nom}</p>
