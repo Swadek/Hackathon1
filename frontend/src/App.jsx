@@ -6,8 +6,11 @@ import "./App.css";
 function App() {
   const [culture, setCulture] = useState();
   const [cultureRandom, setCultureRandom] = useState(0);
-  const [communeSelectedAdd, setCommuneSelectedAdd] = useState([]);
-  const [cityDataSearch, setCityDataSearch] = useState([]);
+  const [communeSelectedAdd, setCommuneSelectedAdd] = useState([
+    "Toulouse - 31000",
+  ]);
+  const [cityDataSearch, setCityDataSearch] = useState([31555]);
+  const [cultureIsLoaded, setCultureIsLoaded] = useState(false);
   const [randomActivity, setRandomActivity] = useState();
 
   return (
@@ -23,6 +26,8 @@ function App() {
         setRandomActivity={setRandomActivity}
         cultureRandom={cultureRandom}
         setCultureRandom={setCultureRandom}
+        cultureIsLoaded={cultureIsLoaded}
+        setCultureIsLoaded={setCultureIsLoaded}
       />
     </div>
   );
