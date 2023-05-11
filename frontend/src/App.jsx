@@ -16,6 +16,7 @@ function App() {
   const [startX, setStartX] = useState(null);
   const [endX, setEndX] = useState(null);
 
+  const [foreCast, setForeCast] = useState();
   return (
     <div className="App">
       <Home
@@ -37,6 +38,8 @@ function App() {
         setStartX={setStartX}
         endX={endX}
         setEndX={setEndX}
+        foreCast={foreCast}
+        setForeCast={setForeCast}
       />
     </div>
   );
