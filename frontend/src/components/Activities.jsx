@@ -7,12 +7,13 @@ import { Card } from "primereact/card";
 function Activities({ culture }) {
   const { fields } = culture;
   console.log(culture);
-  return culture ? (
+  return (
     <Card>
-      <p>{fields.nom}</p>
+      <p className="p-card-title">{fields.domaine}</p>
+      <p className="p-card-subtitle">{fields.type_equipement_ou_lieu}</p>
+      <p className="card-p1">{fields.nom}</p>
+      <p className="card-p2">{fields.adresse_postale}</p>
     </Card>
-  ) : (
-    <p>Loading</p>
   );
 }
 
