@@ -1,13 +1,13 @@
 .city {
   margin: 8px auto;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
   width: 35%;
   border-radius: 50px;
   gap: 5px;
-  padding: 2px;
+  padding: 6px 2px;
   color: white;
 }
 
@@ -15,7 +15,7 @@
   width: 340px;
   margin: 16px auto;
   border-radius: 5px;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.6);
   padding: 4px;
   display: grid;
   grid-template: 1fr 1fr / 1fr 1fr;
@@ -56,4 +56,8 @@
 .weatherText {
   font-size: 1.4rem;
   color: white;
+}
+
+.cityName {
+  font-size: 1.2rem;
 }
