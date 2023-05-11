@@ -2,6 +2,7 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect } from "react";
 import axios from "axios";
+import Weather from "../components/weather/Weather";
 
 function Home({ culture, setCulture }) {
   useEffect(() => {
@@ -13,7 +14,11 @@ function Home({ culture, setCulture }) {
       .catch((error) => console.error(error.message));
   }, []);
   console.warn(culture);
-  return <div>coucou 1</div>;
+  return (
+    <div>
+      <Weather />
+    </div>
+  );
 }
 
 export default Home;
