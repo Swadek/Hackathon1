@@ -12,6 +12,8 @@ function Home({
   setCommuneSelectedAdd,
   cityDataSearch,
   setCityDataSearch,
+  // randomActivity,
+  setRandomActivity,
 }) {
   useEffect(() => {
     axios
@@ -22,6 +24,12 @@ function Home({
       .catch((error) => console.error(error.message));
   }, []);
   console.warn(culture);
+  useEffect(() => {
+    axios
+      .get(`http://www.boredapi.com/api/activity/`)
+      .then((data) => setRandomActivity(data))
+      .catch((error) => console.error(error.message));
+  }, []);
   return (
     <div>
       <Weather cityDataSearch={cityDataSearch} />

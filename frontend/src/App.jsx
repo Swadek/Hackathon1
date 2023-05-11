@@ -7,6 +7,8 @@ function App() {
   const [culture, setCulture] = useState([]);
   const [communeSelectedAdd, setCommuneSelectedAdd] = useState([]);
   const [cityDataSearch, setCityDataSearch] = useState([]);
+  const [randomActivity, setRandomActivity] = useState([]);
+
   return (
     <div className="App">
       <Home
@@ -16,6 +18,8 @@ function App() {
         setCommuneSelectedAdd={setCommuneSelectedAdd}
         cityDataSearch={cityDataSearch}
         setCityDataSearch={setCityDataSearch}
+        randomActivity={randomActivity}
+        setRandomActivity={setRandomActivity}
       />
       <p>coucou</p>
     </div>
