@@ -1,11 +1,9 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable react/prop-types */
 import React from "react";
-
 import { Card } from "primereact/card";
 
 function Activities({ culture }) {
-  console.log(culture);
   return (
     <div>
       {culture ? (
