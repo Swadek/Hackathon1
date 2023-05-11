@@ -37,7 +37,6 @@ function Home({
   }, [communeSelectedAdd]);
   return (
     <div>
-      <Weather cityDataSearch={cityDataSearch} />
       <div className="SearchBar">
         <Searchbar
           setCommuneSelectedAdd={setCommuneSelectedAdd}
@@ -53,6 +52,7 @@ function Home({
           </ul>
         </div>
       </div>
+      <Weather cityDataSearch={cityDataSearch} />
       {cultureIsLoaded ? (
         <div>
           <Activities culture={culture[cultureRandom]} />
