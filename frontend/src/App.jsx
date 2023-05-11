@@ -12,6 +12,9 @@ function App() {
   const [cityDataSearch, setCityDataSearch] = useState([31555]);
   const [cultureIsLoaded, setCultureIsLoaded] = useState(false);
   const [randomActivity, setRandomActivity] = useState();
+  const [savedCulture, setSavedCulture] = useState([]);
+  const [startX, setStartX] = useState(null);
+  const [endX, setEndX] = useState(null);
 
   return (
     <div className="App">
@@ -28,6 +31,12 @@ function App() {
         setCultureRandom={setCultureRandom}
         cultureIsLoaded={cultureIsLoaded}
         setCultureIsLoaded={setCultureIsLoaded}
+        savedCulture={savedCulture}
+        setSavedCulture={setSavedCulture}
+        startX={startX}
+        setStartX={setStartX}
+        endX={endX}
+        setEndX={setEndX}
       />
     </div>
   );
