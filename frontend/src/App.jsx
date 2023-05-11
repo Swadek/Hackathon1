@@ -4,7 +4,8 @@ import "./reset.css";
 import "./App.css";
 
 function App() {
-  const [culture, setCulture] = useState([]);
+  const [culture, setCulture] = useState();
+  const [cultureRandom, setCultureRandom] = useState(0);
   const [communeSelectedAdd, setCommuneSelectedAdd] = useState([]);
   const [cityDataSearch, setCityDataSearch] = useState([]);
   const [randomActivity, setRandomActivity] = useState([]);
@@ -20,8 +21,9 @@ function App() {
         setCityDataSearch={setCityDataSearch}
         randomActivity={randomActivity}
         setRandomActivity={setRandomActivity}
+        cultureRandom={cultureRandom}
+        setCultureRandom={setCultureRandom}
       />
-      <p>coucou</p>
     </div>
   );
 }
