@@ -4,6 +4,7 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import Activities from "../components/Activities";
+import RandomActivityCard from "../components/RandomActivityCard/RandomActivityCard";
 import Weather from "../components/weather/Weather";
 import Searchbar from "../components/searchbar/Searchbar";
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -20,7 +21,7 @@ function Home({
   setCommuneSelectedAdd,
   cityDataSearch,
   setCityDataSearch,
-  // randomActivity,
+  randomActivity,
   setRandomActivity,
 }) {
   function RandomActivities() {
@@ -41,6 +42,7 @@ function Home({
       .then((data) => setRandomActivity(data))
       .catch((error) => console.error(error.message));
   }, []);
+  console.log(randomActivity);
   return (
     <div>
       <Weather cityDataSearch={cityDataSearch} />
@@ -67,6 +69,9 @@ function Home({
       ) : (
         <p>Loading</p>
       )}
+      {randomActivity ? (
+        <RandomActivityCard randomActivity={randomActivity} />
+      ) : null}
     </div>
   );
 }

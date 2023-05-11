@@ -8,7 +8,7 @@ function App() {
   const [cultureRandom, setCultureRandom] = useState(0);
   const [communeSelectedAdd, setCommuneSelectedAdd] = useState([]);
   const [cityDataSearch, setCityDataSearch] = useState([]);
-  const [randomActivity, setRandomActivity] = useState([]);
+  const [randomActivity, setRandomActivity] = useState();
 
   return (
     <div className="App">
