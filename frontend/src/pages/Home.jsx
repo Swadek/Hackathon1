@@ -27,7 +27,7 @@ function Home({
   useEffect(() => {
     axios
       .get(
-        `https://data.culture.gouv.fr/api/records/1.0/search/?dataset=base-des-lieux-et-des-equipements-culturels&q=&lang=fr&rows=10000&sort=sous_domaines&refine.code_insee_arrondt=${cityDataSearch[0]}&exclude.domaine=Archives`
+        `https://data.culture.gouv.fr/api/records/1.0/search/?dataset=base-des-lieux-et-des-equipements-culturels&q=&lang=fr&rows=10000&sort=sous_domaines&refine.code_insee_arrondt=${cityDataSearch[0]}&exclude.domaine=Archives&exclude.sous_domaines=Monument `
       )
       .then((res) => {
         setCulture(res.data.records);
@@ -35,6 +35,7 @@ function Home({
       })
       .catch((error) => console.error(error.message));
   }, [communeSelectedAdd]);
+  console.log(culture, cityDataSearch);
   return (
     <div>
       <Weather cityDataSearch={cityDataSearch} />
