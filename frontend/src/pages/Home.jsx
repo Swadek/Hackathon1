@@ -4,9 +4,12 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import Activities from "../components/Activities";
+import RandomActivityCard from "../components/RandomActivityCard/RandomActivityCard";
 import Weather from "../components/weather/Weather";
 import Searchbar from "../components/searchbar/Searchbar";
+// eslint-disable-next-line import/no-extraneous-dependencies
 import "primereact/resources/themes/lara-light-indigo/theme.css";
+// eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies
 import "primereact/resources/primereact.min.css";
 
 function Home({
@@ -20,6 +23,8 @@ function Home({
   setCityDataSearch,
   cultureIsLoaded,
   setCultureIsLoaded,
+  randomActivity,
+  setRandomActivity,
   savedCulture,
   setSavedCulture,
   startX,
@@ -45,6 +50,13 @@ function Home({
       })
       .catch((error) => console.error(error.message));
   }, [communeSelectedAdd]);
+  useEffect(() => {
+    axios
+      .get(`http://www.boredapi.com/api/activity/`)
+      .then((data) => setRandomActivity(data))
+      .catch((error) => console.error(error.message));
+  }, []);
+  console.log(randomActivity);
   console.log(culture, cityDataSearch, savedCulture);
   return (
     <div>
@@ -81,6 +93,9 @@ function Home({
       ) : (
         <p>Loading</p>
       )}
+      {randomActivity ? (
+        <RandomActivityCard randomActivity={randomActivity} />
+      ) : null}
     </div>
   );
 }

@@ -43,7 +43,7 @@ function Activities({
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
         >
-          <Card>
+          <Card className="cardActivity">
             <p className="p-card-title">{culture.fields.domaine}</p>
             <p className="p-card-subtitle">
               {culture.fields.type_equipement_ou_lieu}
