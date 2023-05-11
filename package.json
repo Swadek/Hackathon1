@@ -31,8 +31,9 @@
     "husky": "^8.0.3"
   },
   "dependencies": {
-    "primereact": "^9.3.1",
     "axios": "^1.4.0",
-    "dotenv": "^16.0.3"
+    "dotenv": "^16.0.3",
+    "primeflex": "^3.3.0",
+    "primereact": "^9.3.1"
   }
 }

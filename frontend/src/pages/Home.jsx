@@ -5,9 +5,12 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import Activities from "../components/Activities";
+import RandomActivityCard from "../components/RandomActivityCard/RandomActivityCard";
 import Weather from "../components/weather/Weather";
 import Searchbar from "../components/searchbar/Searchbar";
+// eslint-disable-next-line import/no-extraneous-dependencies
 import "primereact/resources/themes/lara-light-indigo/theme.css";
+// eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies
 import "primereact/resources/primereact.min.css";
 import weatherCode from "../utils";
 
@@ -30,16 +33,28 @@ function Home({
   setCityDataSearch,
   cultureIsLoaded,
   setCultureIsLoaded,
+  randomActivity,
+  setRandomActivity,
+  savedCulture,
+  setSavedCulture,
+  startX,
+  setStartX,
+  endX,
+  setEndX,
   foreCast,
   setForeCast,
 }) {
   function RandomActivities() {
     setCultureRandom(Math.floor(Math.random() * culture.length));
   }
+  function SaveActivities() {
+    setSavedCulture([...savedCulture, culture[cultureRandom]]);
+    setCultureRandom(Math.floor(Math.random() * culture.length));
+  }
   useEffect(() => {
     axios
       .get(
-        `https://data.culture.gouv.fr/api/records/1.0/search/?dataset=base-des-lieux-et-des-equipements-culturels&q=&lang=fr&rows=10000&sort=sous_domaines&refine.code_insee_arrondt=${cityDataSearch[0]}&exclude.domaine=Archives`
+        `https://data.culture.gouv.fr/api/records/1.0/search/?dataset=base-des-lieux-et-des-equipements-culturels&q=&lang=fr&rows=10000&sort=sous_domaines&refine.code_insee_arrondt=${cityDataSearch[0]}&exclude.domaine=Archives&exclude.sous_domaines=Monument `
       )
       .then((res) => {
         setCulture(res.data.records);
@@ -47,7 +62,14 @@ function Home({
       })
       .catch((error) => console.error(error.message));
   }, [communeSelectedAdd]);
-
+  useEffect(() => {
+    axios
+      .get(`http://www.boredapi.com/api/activity/`)
+      .then((data) => setRandomActivity(data))
+      .catch((error) => console.error(error.message));
+  }, []);
+  console.log(randomActivity);
+  console.log(culture, cityDataSearch, savedCulture);
   return (
     <div>
       {foreCast
@@ -72,12 +94,24 @@ function Home({
       />
       {cultureIsLoaded ? (
         <div>
-          <Activities culture={culture[cultureRandom]} />
+          <Activities
+            culture={culture[cultureRandom]}
+            startX={startX}
+            setStartX={setStartX}
+            endX={endX}
+            setEndX={setEndX}
+            RandomActivities={() => RandomActivities()}
+            SaveActivities={() => SaveActivities()}
+          />
           <button onClick={() => RandomActivities()}>Next</button>
+          <button onClick={() => SaveActivities()}>Save</button>
         </div>
       ) : (
         <p>Loading</p>
       )}
+      {randomActivity ? (
+        <RandomActivityCard randomActivity={randomActivity} />
+      ) : null}
     </div>
   );
 }

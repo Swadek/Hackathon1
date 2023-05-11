@@ -11,6 +11,11 @@ function App() {
   ]);
   const [cityDataSearch, setCityDataSearch] = useState([31555]);
   const [cultureIsLoaded, setCultureIsLoaded] = useState(false);
+  const [randomActivity, setRandomActivity] = useState();
+  const [savedCulture, setSavedCulture] = useState([]);
+  const [startX, setStartX] = useState(null);
+  const [endX, setEndX] = useState(null);
+
   const [foreCast, setForeCast] = useState();
   return (
     <div className="App">
@@ -21,10 +26,18 @@ function App() {
         setCommuneSelectedAdd={setCommuneSelectedAdd}
         cityDataSearch={cityDataSearch}
         setCityDataSearch={setCityDataSearch}
+        randomActivity={randomActivity}
+        setRandomActivity={setRandomActivity}
         cultureRandom={cultureRandom}
         setCultureRandom={setCultureRandom}
         cultureIsLoaded={cultureIsLoaded}
         setCultureIsLoaded={setCultureIsLoaded}
+        savedCulture={savedCulture}
+        setSavedCulture={setSavedCulture}
+        startX={startX}
+        setStartX={setStartX}
+        endX={endX}
+        setEndX={setEndX}
         foreCast={foreCast}
         setForeCast={setForeCast}
       />
