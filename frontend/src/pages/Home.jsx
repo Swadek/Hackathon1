@@ -18,6 +18,8 @@ function Home({
   setCommuneSelectedAdd,
   cityDataSearch,
   setCityDataSearch,
+  cultureIsLoaded,
+  setCultureIsLoaded,
 }) {
   function RandomActivities() {
     setCultureRandom(Math.floor(Math.random() * culture.length));
@@ -25,12 +27,14 @@ function Home({
   useEffect(() => {
     axios
       .get(
-        `https://data.culture.gouv.fr/api/records/1.0/search/?dataset=base-des-lieux-et-des-equipements-culturels&q=&lang=fr&rows=10000&sort=sous_domaines&refine.code_insee_arrondt=75102&exclude.domaine=Archives`
+        `https://data.culture.gouv.fr/api/records/1.0/search/?dataset=base-des-lieux-et-des-equipements-culturels&q=&lang=fr&rows=10000&sort=sous_domaines&refine.code_insee_arrondt=${cityDataSearch[0]}&exclude.domaine=Archives`
       )
-      .then((res) => setCulture(res.data.records))
+      .then((res) => {
+        setCulture(res.data.records);
+        setCultureIsLoaded(true);
+      })
       .catch((error) => console.error(error.message));
-  }, []);
-  console.log(culture, cultureRandom);
+  }, [communeSelectedAdd]);
   return (
     <div>
       <Weather cityDataSearch={cityDataSearch} />
@@ -49,7 +53,7 @@ function Home({
           </ul>
         </div>
       </div>
-      {culture ? (
+      {cultureIsLoaded ? (
         <div>
           <Activities culture={culture[cultureRandom]} />
           <button onClick={() => RandomActivities()}>Next</button>
