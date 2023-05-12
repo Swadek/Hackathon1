@@ -7,7 +7,7 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import Activities from "../components/Activities";
-import RandomActivityCard from "../components/RandomActivityCard";
+// import RandomActivityCard from "../components/RandomActivityCard/RandomActivityCard";
 import Weather from "../components/weather/Weather";
 import Searchbar from "../components/searchbar/Searchbar";
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -22,7 +22,8 @@ import FestivalCard from "../components/FestivalCard";
 const BgImg = styled.div`
   background: url(${({ url }) => url});
   height: 50vh;
-  width: 100vw;
+  top: 0;
+  width: 100%;
   position: absolute;
   z-index: -1;
 `;
@@ -38,7 +39,7 @@ function Home({
   setCityDataSearch,
   cultureIsLoaded,
   setCultureIsLoaded,
-  randomActivity,
+  // randomActivity,
   setRandomActivity,
   savedCulture,
   setSavedCulture,
@@ -62,7 +63,10 @@ function Home({
     setInOut(!inOut);
   }
   function SaveActivities() {
-    setSavedCulture([...savedCulture, culture[cultureRandom]]);
+    setSavedCulture([
+      ...savedCulture,
+      inOut ? culture[cultureRandom] : festival[cultureRandom],
+    ]);
     setCultureRandom(Math.floor(Math.random() * culture.length));
     setInOut(!inOut);
   }
@@ -93,7 +97,7 @@ function Home({
       .catch((error) => console.error(error.message));
   }, [communeSelectedAdd]);
   return (
-    <div>
+    <div className="generalContainer">
       {foreCast
         ? weatherCode.map((el) => {
             return el.code === foreCast.weather
@@ -130,7 +134,16 @@ function Home({
               SaveActivities={() => SaveActivities()}
             />
           ) : inOut ? (
-            <FestivalCard festival={festival[cultureRandom]} />
+            <FestivalCard
+              festival={festival[cultureRandom]}
+              culture={culture[cultureRandom]}
+              startX={startX}
+              setStartX={setStartX}
+              endX={endX}
+              setEndX={setEndX}
+              RandomActivities={() => RandomActivities()}
+              SaveActivities={() => SaveActivities()}
+            />
           ) : (
             <Activities
               culture={culture[cultureRandom]}
@@ -142,15 +155,19 @@ function Home({
               SaveActivities={() => SaveActivities()}
             />
           )}
-          <button onClick={() => RandomActivities()}>Next</button>
-          <button onClick={() => SaveActivities()}>Save</button>
+          <button className="buttons" onClick={() => RandomActivities()}>
+            Next
+          </button>
+          <button className="buttons" onClick={() => SaveActivities()}>
+            Save
+          </button>
         </div>
       ) : (
         <p>Loading</p>
       )}
-      {randomActivity ? (
+      {/* {randomActivity ? (
         <RandomActivityCard randomActivity={randomActivity} />
-      ) : null}
+      ) : null} */}
       {cultureIsLoaded && (
         <Map
           coord={culture[cultureRandom]}
