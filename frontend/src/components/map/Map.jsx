@@ -7,7 +7,7 @@ import "./Map.css";
 
 export default function Map({ coord }) {
   return (
-    <div>
+    <div className="map-container">
       <MapContainer key={coord.toString()} center={coord} zoom={15}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

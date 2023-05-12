@@ -12,7 +12,7 @@
 }
 
 .weatherContainer {
-  width: 340px;
+  width: 90%;
   margin: 16px auto;
   border-radius: 5px;
   background-color: rgba(0, 0, 0, 0.6);
