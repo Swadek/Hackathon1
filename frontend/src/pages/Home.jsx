@@ -78,7 +78,6 @@ function Home({
       .then((res) => {
         setCulture(res.data.records);
         setCultureIsLoaded(true);
-        console.log(res.data.records);
       })
       .catch((error) => console.error(error.message));
   }, [communeSelectedAdd]);
@@ -96,7 +95,7 @@ function Home({
       .then((data) => setFestival(data.data.records))
       .catch((error) => console.error(error.message));
   }, [communeSelectedAdd]);
-  console.log(inOut, actualWeather);
+
   return (
     <div className="generalContainer">
       {foreCast
