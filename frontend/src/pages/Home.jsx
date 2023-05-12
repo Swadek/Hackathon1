@@ -17,7 +17,6 @@ import "./Home.css";
 import weatherCode from "../utils";
 import Map from "../components/map/Map";
 // import FestivalCard from "../components/FestivalCard";
-import "./Home.css";
 
 const BgImg = styled.div`
   background: url(${({ url }) => url});
