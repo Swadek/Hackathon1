@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable react/button-has-type */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable react/prop-types */
@@ -50,13 +51,20 @@ function Home({
   setCoordUndefined,
   coordUndefined,
   festival,
+  setFestival,
+  inOut,
+  setInOut,
+  actualWeather,
+  setActualWeather,
 }) {
   function RandomActivities() {
     setCultureRandom(Math.floor(Math.random() * culture.length));
+    setInOut(!inOut);
   }
   function SaveActivities() {
     setSavedCulture([...savedCulture, culture[cultureRandom]]);
     setCultureRandom(Math.floor(Math.random() * culture.length));
+    setInOut(!inOut);
   }
   useEffect(() => {
     axios
@@ -66,7 +74,6 @@ function Home({
       .then((res) => {
         setCulture(res.data.records);
         setCultureIsLoaded(true);
-        console.log(res.data.records);
       })
       .catch((error) => console.error(error.message));
   }, [communeSelectedAdd]);
@@ -75,16 +82,26 @@ function Home({
       .get(`http://www.boredapi.com/api/activity/`)
       .then((data) => setRandomActivity(data))
       .catch((error) => console.error(error.message));
-  }, []);
-  // console.log(randomActivity);
-  // console.log(culture, cityDataSearch, savedCulture);
+  }, [communeSelectedAdd]);
+  useEffect(() => {
+    axios
+      .get(
+        `https://data.culture.gouv.fr/api/records/1.0/search/?dataset=festivals-global-festivals-_-pl&q=&rows=10000&refine.code_insee_commune=${cityDataSearch[0]}`
+      )
+      .then((data) => setFestival(data.data.records))
+      .catch((error) => console.error(error.message));
+  }, [communeSelectedAdd]);
+
+  console.log(festival);
+
   return (
     <div>
       {foreCast
         ? weatherCode.map((el) => {
-            return el.code === foreCast.weather ? (
-              <BgImg key={el.code} url={el.urlbg} />
-            ) : null;
+            return el.code === foreCast.weather
+              ? (setActualWeather(el.weatherIsGood),
+                (<BgImg key={el.code} url={el.urlbg} />))
+              : null;
           })
         : null}
 
@@ -100,18 +117,33 @@ function Home({
         cityDataSearch={cityDataSearch}
         foreCast={foreCast}
         setForeCast={setForeCast}
+        setInOut={setInOut}
       />
-      {cultureIsLoaded ? (
+      {cultureIsLoaded && festival ? (
         <div>
-          <Activities
-            culture={culture[cultureRandom]}
-            startX={startX}
-            setStartX={setStartX}
-            endX={endX}
-            setEndX={setEndX}
-            RandomActivities={() => RandomActivities()}
-            SaveActivities={() => SaveActivities()}
-          />
+          {!actualWeather ? (
+            <Activities
+              culture={culture[cultureRandom]}
+              startX={startX}
+              setStartX={setStartX}
+              endX={endX}
+              setEndX={setEndX}
+              RandomActivities={() => RandomActivities()}
+              SaveActivities={() => SaveActivities()}
+            />
+          ) : inOut ? (
+            <FestivalCard festival={festival[cultureRandom]} />
+          ) : (
+            <Activities
+              culture={culture[cultureRandom]}
+              startX={startX}
+              setStartX={setStartX}
+              endX={endX}
+              setEndX={setEndX}
+              RandomActivities={() => RandomActivities()}
+              SaveActivities={() => SaveActivities()}
+            />
+          )}
           <button onClick={() => RandomActivities()}>Next</button>
           <button onClick={() => SaveActivities()}>Save</button>
         </div>
@@ -122,9 +154,12 @@ function Home({
         <RandomActivityCard randomActivity={randomActivity} />
       ) : null}
       {cultureIsLoaded && (
-        <Map coord={culture[cultureRandom]} coordUndefined={coordUndefined} />
+        <Map
+          coord={culture[cultureRandom]}
+          coordUndefined={coordUndefined}
+          savedCulture={savedCulture}
+        />
       )}
-      {festival ? <FestivalCard festival={festival[cultureRandom]} /> : null}
     </div>
   );
 }
