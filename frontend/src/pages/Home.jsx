@@ -126,6 +126,9 @@ function Home({
         setForeCast={setForeCast}
         setInOut={setInOut}
       />
+      <div className="logo">
+        <img src="./assets/logo_aleactivite.svg" alt="Aleactivite logo" />
+      </div>
       {cultureIsLoaded && festival ? (
         <div>
           {!actualWeather ? (
@@ -161,8 +164,8 @@ function Home({
             />
           )}
           <div className="buttons">
-            <button onClick={() => RandomActivities()}>Next</button>
-            <button onClick={() => SaveActivities()}>Save</button>
+            <button onClick={() => RandomActivities()}>Suivant</button>
+            <button onClick={() => SaveActivities()}>Sauvegarder</button>
           </div>
         </div>
       ) : (
