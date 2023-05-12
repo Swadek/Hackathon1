@@ -9,7 +9,6 @@ import axios from "axios";
 import styled from "styled-components";
 import Activities from "../components/Activities";
 import RandomActivityCard from "../components/RandomActivityCard";
-import RandomActivityCard from "../components/RandomActivityCard";
 import Weather from "../components/weather/Weather";
 import Searchbar from "../components/searchbar/Searchbar";
 // eslint-disable-next-line import/no-extraneous-dependencies

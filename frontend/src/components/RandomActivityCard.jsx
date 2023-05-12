@@ -29,9 +29,7 @@ function RandomActivityCard({ randomActivity, setIsHovered }) {
             </p>
           </Card>
           <Card className="randomCardActivity cardActivity cardActivityRandom front">
-            <p className="p-card-title cardActivityRandom back">
-              Trouver une activité
-            </p>
+            <p className="p-card-title">Trouver une activité</p>
           </Card>
         </div>
       )}
