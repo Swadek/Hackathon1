@@ -63,7 +63,10 @@ function Home({
     setInOut(!inOut);
   }
   function SaveActivities() {
-    setSavedCulture([...savedCulture, culture[cultureRandom]]);
+    setSavedCulture([
+      ...savedCulture,
+      inOut ? culture[cultureRandom] : festival[cultureRandom],
+    ]);
     setCultureRandom(Math.floor(Math.random() * culture.length));
     setInOut(!inOut);
   }
