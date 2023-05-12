@@ -5,9 +5,10 @@
 import React, { useEffect } from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import axios from "axios";
+// eslint-disable-next-line import/no-extraneous-dependencies
 import styled from "styled-components";
 import Activities from "../components/Activities";
-// import RandomActivityCard from "../components/RandomActivityCard/RandomActivityCard";
+import RandomActivityCard from "../components/RandomActivityCard";
 import Weather from "../components/weather/Weather";
 import Searchbar from "../components/searchbar/Searchbar";
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -18,6 +19,8 @@ import "./Home.css";
 import weatherCode from "../utils";
 import Map from "../components/map/Map";
 import FestivalCard from "../components/FestivalCard";
+import Footer from "../components/footer/footer";
+import "../components/footer/footer.css";
 
 const BgImg = styled.div`
   background: url(${({ url }) => url});
@@ -39,7 +42,7 @@ function Home({
   setCityDataSearch,
   cultureIsLoaded,
   setCultureIsLoaded,
-  // randomActivity,
+  randomActivity,
   setRandomActivity,
   savedCulture,
   setSavedCulture,
@@ -57,6 +60,8 @@ function Home({
   setInOut,
   actualWeather,
   setActualWeather,
+  isHovered,
+  setIsHovered,
 }) {
   function RandomActivities() {
     setCultureRandom(Math.floor(Math.random() * culture.length));
@@ -83,10 +88,10 @@ function Home({
   }, [communeSelectedAdd]);
   useEffect(() => {
     axios
-      .get(`http://www.boredapi.com/api/activity/`)
+      .get(`https://www.boredapi.com/api/activity/`)
       .then((data) => setRandomActivity(data))
       .catch((error) => console.error(error.message));
-  }, [communeSelectedAdd, cultureRandom]);
+  }, [cultureRandom, isHovered]);
   useEffect(() => {
     axios
       .get(
@@ -121,6 +126,9 @@ function Home({
         setForeCast={setForeCast}
         setInOut={setInOut}
       />
+      <div className="logo">
+        <img src="./assets/logo_aleactivite.svg" alt="Aleactivite logo" />
+      </div>
       {cultureIsLoaded && festival ? (
         <div>
           {!actualWeather ? (
@@ -155,19 +163,21 @@ function Home({
               SaveActivities={() => SaveActivities()}
             />
           )}
-          <button className="buttons" onClick={() => RandomActivities()}>
-            Next
-          </button>
-          <button className="buttons" onClick={() => SaveActivities()}>
-            Save
-          </button>
+          <div className="buttons">
+            <button onClick={() => RandomActivities()}>Suivant</button>
+            <button onClick={() => SaveActivities()}>Sauvegarder</button>
+          </div>
         </div>
       ) : (
         <p>Loading</p>
       )}
-      {/* {randomActivity ? (
-        <RandomActivityCard randomActivity={randomActivity} />
-      ) : null} */}
+      {randomActivity ? (
+        <RandomActivityCard
+          randomActivity={randomActivity}
+          setRandomActivity={setRandomActivity}
+          setIsHovered={setIsHovered}
+        />
+      ) : null}
       {cultureIsLoaded && (
         <Map
           coord={culture[cultureRandom]}
@@ -175,6 +185,9 @@ function Home({
           savedCulture={savedCulture}
         />
       )}
+      <div className="component-footer">
+        <Footer />
+      </div>
     </div>
   );
 }

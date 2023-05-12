@@ -1,0 +1,33 @@
+.randomCardActivity {
+  display: none;
+}
+
+.p-card-content {
+  padding: 1rem;
+}
+
+@media screen and (min-width: 768px) {
+  .randomCardActivity {
+    width: 30vw;
+    height: 25vh;
+  }
+  .p-card .p-card-title-2 {
+    line-height: 3rem;
+    vertical-align: middle;
+    font-weight: bold;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  .p-card-content .p-card-subtitle {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .randomCardActivity {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    top: 22.5vh;
+    right: 24px;
+  }
+}

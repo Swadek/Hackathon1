@@ -1,5 +1,4 @@
 .cardActivity {
-  margin: 10px;
   width: 70vw;
 }
 .p-cardActivity {
@@ -20,17 +19,39 @@
   width: 100%;
 }
 
+.cardActivityRandom {
+  backface-visibility: hidden;
+  transition: transform 0.5s linear 0s;
+  position: absolute;
+  height: 160px;
+}
+.cardActivityRandomRotate > .front {
+  transform: perspective(1000px) rotateY(0deg);
+}
+.cardActivityRandomRotate > .back {
+  transform: perspective(1000px) rotateY(180deg);
+  z-index: 1;
+}
+.cardActivityRandomRotate:hover > .front {
+  transform: perspective(1000px) rotateY(-180deg);
+}
+.cardActivityRandomRotate:hover > .back {
+  transform: perspective(1000px) rotateY(0deg);
+}
 @media screen and (min-width: 768px) {
   .cardActivity {
     width: 30vw;
+    height: 25vh;
   }
   .card .p-card-title {
     font-size: 2rem;
+    margin-bottom: 1rem;
   }
   .card .p-card-subtitle {
     font-size: 1.6rem;
+    margin-bottom: 1rem;
   }
   .card .p-cardActivity {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
   }
 }
