@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable react/prop-types */
 import React, { useRef } from "react";
-
+import "./Activities.css";
 import { Card } from "primereact/card";
 
 function Activities({
@@ -35,9 +35,10 @@ function Activities({
     setEndX(null);
   }
   return (
-    <div>
+    <div className="cardContainer">
       {culture ? (
         <div
+          className="card"
           ref={modalRef}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}

@@ -1,11 +1,36 @@
 .cardActivity {
   margin: 10px;
+  width: 70vw;
 }
 .p-cardActivity {
   margin-bottom: 0.5rem;
 }
+
+.p-card .p-card-body {
+  padding: 0rem;
+  width: 100%;
+}
+
+.p-card .p-card-content {
+  padding: 1rem;
+}
+
+.p-card-body,
+.p-card-content {
+  width: 100%;
+}
+
 @media screen and (min-width: 768px) {
   .cardActivity {
-    width: 60dvw;
+    width: 30vw;
+  }
+  .card .p-card-title {
+    font-size: 2rem;
+  }
+  .card .p-card-subtitle {
+    font-size: 1.6rem;
+  }
+  .card .p-cardActivity {
+    font-size: 1.2rem;
   }
 }

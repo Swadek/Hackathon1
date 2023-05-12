@@ -15,7 +15,7 @@ export default function Map({ coord, coordUndefined, savedCulture }) {
   return (
     <div>
       {coord ? (
-        <div>
+        <div className="map-container">
           <MapContainer
             key={coord.fields.coordonnees_gps_lat_lon.toString()}
             center={coord.fields.coordonnees_gps_lat_lon}
@@ -46,7 +46,7 @@ export default function Map({ coord, coordUndefined, savedCulture }) {
           </MapContainer>
         </div>
       ) : (
-        <div>
+        <div className="map-container">
           <MapContainer
             key={coordUndefined.toString()}
             center={coordUndefined}
