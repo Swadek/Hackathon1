@@ -2,7 +2,7 @@
   height: 50vh;
   width: 100%;
   position: absolute;
-  top: 50vh;
+  bottom: 30px;
 }
 
 .leaflet-container {
