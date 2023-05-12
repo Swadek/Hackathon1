@@ -5,7 +5,7 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import Activities from "../components/Activities";
-import RandomActivityCard from "../components/RandomActivityCard/RandomActivityCard";
+import RandomActivityCard from "../components/RandomActivityCard";
 import Weather from "../components/weather/Weather";
 import Searchbar from "../components/searchbar/Searchbar";
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -13,6 +13,8 @@ import "primereact/resources/themes/lara-light-indigo/theme.css";
 // eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies
 import "primereact/resources/primereact.min.css";
 import weatherCode from "../utils";
+import Map from "../components/map/Map";
+import FestivalCard from "../components/FestivalCard";
 
 const BgImg = styled.div`
   background: url(${({ url }) => url});
@@ -43,6 +45,8 @@ function Home({
   setEndX,
   foreCast,
   setForeCast,
+  festival,
+  setFestival,
 }) {
   function RandomActivities() {
     setCultureRandom(Math.floor(Math.random() * culture.length));
@@ -59,6 +63,7 @@ function Home({
       .then((res) => {
         setCulture(res.data.records);
         setCultureIsLoaded(true);
+        console.log(res.data.records);
       })
       .catch((error) => console.error(error.message));
   }, [communeSelectedAdd]);
@@ -68,8 +73,15 @@ function Home({
       .then((data) => setRandomActivity(data))
       .catch((error) => console.error(error.message));
   }, []);
-  console.log(randomActivity);
-  console.log(culture, cityDataSearch, savedCulture);
+  useEffect(() => {
+    axios
+      .get(
+        `https://data.culture.gouv.fr/api/records/1.0/search/?dataset=festivals-global-festivals-_-pl&q=&rows=10000&refine.code_insee_commune=31555`
+      )
+      .then((data) => setFestival(data.data.records))
+      .catch((error) => console.error(error.message));
+  }, []);
+  console.log(festival);
   return (
     <div>
       {foreCast
@@ -112,6 +124,10 @@ function Home({
       {randomActivity ? (
         <RandomActivityCard randomActivity={randomActivity} />
       ) : null}
+      {cultureIsLoaded && (
+        <Map coord={culture[cultureRandom].fields.coordonnees_gps_lat_lon} />
+      )}
+      {festival ? <FestivalCard festival={festival[cultureRandom]} /> : null}
     </div>
   );
 }
