@@ -65,3 +65,16 @@ input.searchBar::placeholder {
   color: white;
   cursor: pointer;
 }
+
+@media screen and (min-width: 768px) {
+  .search-inner {
+    height: 48px;
+  }
+  input.searchBar::placeholder {
+    font-size: 1.4rem;
+    padding-left: 0.6rem;
+  }
+  input.searchBar {
+    margin-left: 1rem;
+  }
+}

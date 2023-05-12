@@ -8,7 +8,7 @@ import axios from "axios";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import styled from "styled-components";
 import Activities from "../components/Activities";
-import RandomActivityCard from "../components/RandomActivityCard";
+// import RandomActivityCard from "../components/RandomActivityCard/RandomActivityCard";
 import Weather from "../components/weather/Weather";
 import Searchbar from "../components/searchbar/Searchbar";
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -23,7 +23,8 @@ import FestivalCard from "../components/FestivalCard";
 const BgImg = styled.div`
   background: url(${({ url }) => url});
   height: 50vh;
-  width: 100vw;
+  top: 0;
+  width: 100%;
   position: absolute;
   z-index: -1;
 `;
@@ -63,7 +64,10 @@ function Home({
     setInOut(!inOut);
   }
   function SaveActivities() {
-    setSavedCulture([...savedCulture, culture[cultureRandom]]);
+    setSavedCulture([
+      ...savedCulture,
+      inOut ? culture[cultureRandom] : festival[cultureRandom],
+    ]);
     setCultureRandom(Math.floor(Math.random() * culture.length));
     setInOut(!inOut);
   }
@@ -75,7 +79,6 @@ function Home({
       .then((res) => {
         setCulture(res.data.records);
         setCultureIsLoaded(true);
-        console.log(res.data.records);
       })
       .catch((error) => console.error(error.message));
   }, [communeSelectedAdd]);
@@ -84,7 +87,7 @@ function Home({
       .get(`http://www.boredapi.com/api/activity/`)
       .then((data) => setRandomActivity(data))
       .catch((error) => console.error(error.message));
-  }, []);
+  }, [cultureRandom]);
   useEffect(() => {
     axios
       .get(
@@ -93,9 +96,9 @@ function Home({
       .then((data) => setFestival(data.data.records))
       .catch((error) => console.error(error.message));
   }, [communeSelectedAdd]);
-  console.log(inOut, actualWeather);
+
   return (
-    <div>
+    <div className="generalContainer">
       {foreCast
         ? weatherCode.map((el) => {
             return el.code === foreCast.weather
@@ -132,7 +135,16 @@ function Home({
               SaveActivities={() => SaveActivities()}
             />
           ) : inOut ? (
-            <FestivalCard festival={festival[cultureRandom]} />
+            <FestivalCard
+              festival={festival[cultureRandom]}
+              culture={culture[cultureRandom]}
+              startX={startX}
+              setStartX={setStartX}
+              endX={endX}
+              setEndX={setEndX}
+              RandomActivities={() => RandomActivities()}
+              SaveActivities={() => SaveActivities()}
+            />
           ) : (
             <Activities
               culture={culture[cultureRandom]}
@@ -144,8 +156,12 @@ function Home({
               SaveActivities={() => SaveActivities()}
             />
           )}
-          <button onClick={() => RandomActivities()}>Next</button>
-          <button onClick={() => SaveActivities()}>Save</button>
+          <button className="buttons" onClick={() => RandomActivities()}>
+            Next
+          </button>
+          <button className="buttons" onClick={() => SaveActivities()}>
+            Save
+          </button>
         </div>
       ) : (
         <p>Loading</p>
