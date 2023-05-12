@@ -183,7 +183,6 @@ function Home({
         />
       )}
       <div className="component-footer">
-        {" "}
         <Footer />
       </div>
     </div>

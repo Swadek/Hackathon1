@@ -1,14 +1,15 @@
 .navbar {
-  background-color: rgba(0, 0, 0, 0.2) ;
+  background-color: rgba(0, 0, 0, 0.9);
 }
 
 .logoHackathon {
   padding: 10px 10px;
-  width: 70px;
-  height:70px;
+  width: 150px;
 }
 
-h2.titleAPropos, div.aboutHackathon p, div.aboutAPI p {
+h2.titleAPropos,
+div.aboutHackathon p,
+div.aboutAPI p {
   padding: 10px;
 }
 
@@ -26,7 +27,7 @@ h2.titleAPropos {
   text-decoration: underline;
 }
 
-p.no-justify{
+p.no-justify {
   padding: 10px 10px 20px 10px;
   margin-bottom: 30px;
 }
@@ -36,34 +37,35 @@ img.photo {
 }
 
 @media screen and (min-width: 768px) {
-div.trombi{
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  gap: 10px;
-}
+  div.trombi {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
 
-.logoHackathon {
-  padding: 10px 10px;
-  width: 100px;
-  height:100px;
-}
+  .logoHackathon {
+    padding: 10px 10px;
+    width: 250px;
+  }
 
-h2.titleAPropos, div.aboutHackathon p, div.aboutAPI p {
-  padding: 15px;
-}
+  h2.titleAPropos,
+  div.aboutHackathon p,
+  div.aboutAPI p {
+    padding: 15px;
+  }
 
-li.api {
-  padding: 7px 0;
-}
+  li.api {
+    padding: 7px 0;
+  }
 
-p.no-justify{
-  padding: 15px 15px 25px 15px;
-  margin-bottom: 30px;
-  margin-top: 30px;
-}
+  p.no-justify {
+    padding: 15px 15px 25px 15px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+  }
 
-img.photo {
-  padding: 0;
-}
+  img.photo {
+    padding: 0;
+  }
 }

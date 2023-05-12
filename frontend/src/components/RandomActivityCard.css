@@ -11,8 +11,11 @@
     width: 30vw;
     height: 25vh;
   }
-  .p-card-content .p-card-title {
-    font-size: 2.6rem;
+  .p-card .p-card-title-2 {
+    line-height: 3rem;
+    vertical-align: middle;
+    font-weight: bold;
+    font-size: 2rem;
     margin-bottom: 1rem;
   }
   .p-card-content .p-card-subtitle {
@@ -21,9 +24,9 @@
   }
 
   .randomCardActivity {
-    display: block;
+    display: flex;
     position: absolute;
-
+    align-items: center;
     top: 22.5vh;
     right: 24px;
   }
