@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
+import About from "./pages/about/About";
 import "./reset.css";
 import "./App.css";
 import "./CSS/activityCard.css";
@@ -24,36 +26,48 @@ function App() {
 
   return (
     <div className="App">
-      <Home
-        culture={culture}
-        setCulture={setCulture}
-        communeSelectedAdd={communeSelectedAdd}
-        setCommuneSelectedAdd={setCommuneSelectedAdd}
-        cityDataSearch={cityDataSearch}
-        setCityDataSearch={setCityDataSearch}
-        randomActivity={randomActivity}
-        setRandomActivity={setRandomActivity}
-        cultureRandom={cultureRandom}
-        setCultureRandom={setCultureRandom}
-        cultureIsLoaded={cultureIsLoaded}
-        setCultureIsLoaded={setCultureIsLoaded}
-        savedCulture={savedCulture}
-        setSavedCulture={setSavedCulture}
-        startX={startX}
-        setStartX={setStartX}
-        endX={endX}
-        setEndX={setEndX}
-        foreCast={foreCast}
-        setForeCast={setForeCast}
-        festival={festival}
-        setFestival={setFestival}
-        setCoordUndefined={setCoordUndefined}
-        coordUndefined={coordUndefined}
-        inOut={inOut}
-        setInOut={setInOut}
-        actualWeather={actualWeather}
-        setActualWeather={setActualWeather}
-      />
+      <Router>
+        <div>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Home
+                  culture={culture}
+                  setCulture={setCulture}
+                  communeSelectedAdd={communeSelectedAdd}
+                  setCommuneSelectedAdd={setCommuneSelectedAdd}
+                  cityDataSearch={cityDataSearch}
+                  setCityDataSearch={setCityDataSearch}
+                  randomActivity={randomActivity}
+                  setRandomActivity={setRandomActivity}
+                  cultureRandom={cultureRandom}
+                  setCultureRandom={setCultureRandom}
+                  cultureIsLoaded={cultureIsLoaded}
+                  setCultureIsLoaded={setCultureIsLoaded}
+                  savedCulture={savedCulture}
+                  setSavedCulture={setSavedCulture}
+                  startX={startX}
+                  setStartX={setStartX}
+                  endX={endX}
+                  setEndX={setEndX}
+                  foreCast={foreCast}
+                  setForeCast={setForeCast}
+                  festival={festival}
+                  setFestival={setFestival}
+                  setCoordUndefined={setCoordUndefined}
+                  coordUndefined={coordUndefined}
+                  inOut={inOut}
+                  setInOut={setInOut}
+                  actualWeather={actualWeather}
+                  setActualWeather={setActualWeather}
+                />
+              }
+            />
+            <Route path="/about" element={<About />} />
+          </Routes>
+        </div>
+      </Router>
     </div>
   );
 }

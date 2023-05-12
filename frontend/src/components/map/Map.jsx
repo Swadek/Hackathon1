@@ -17,26 +17,46 @@ export default function Map({ coord, coordUndefined, savedCulture }) {
       {coord ? (
         <div className="map-container">
           <MapContainer
-            key={coord.fields.coordonnees_gps_lat_lon.toString()}
-            center={coord.fields.coordonnees_gps_lat_lon}
+            key={(coord.fields.coordonnees_gps_lat_lon
+              ? coord.fields.coordonnees_gps_lat_lon
+              : coord.fields.geocodage_xy
+            ).toString()}
+            center={
+              coord.fields.coordonnees_gps_lat_lon
+                ? coord.fields.coordonnees_gps_lat_lon
+                : coord.fields.geocodage_xy
+            }
             zoom={15}
           >
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <Marker position={coord.fields.coordonnees_gps_lat_lon} />
+            <Marker
+              position={
+                coord.fields.coordonnees_gps_lat_lon
+                  ? coord.fields.coordonnees_gps_lat_lon
+                  : coord.fields.geocodage_xy
+              }
+            />
             {savedCulture.length > 0
               ? savedCulture.map((el) => {
-                  console.log(el.fields.coordonnees_gps_lat_lon);
                   return (
                     <div key={el.recordid}>
                       <Marker
-                        position={el.fields.coordonnees_gps_lat_lon}
+                        position={
+                          el.fields.geocodage_xy
+                            ? el.fields.geocodage_xy
+                            : el.fields.coordonnees_gps_lat_lon
+                        }
                         icon={customIcon}
                       >
                         <Popup>
-                          <p>{el.fields.nom}</p>
+                          <p>
+                            {el.fields.coordonnees_gps_lat_lon
+                              ? el.fields.nom
+                              : el.fields.nom_du_festival}
+                          </p>
                         </Popup>
                       </Marker>
                     </div>
