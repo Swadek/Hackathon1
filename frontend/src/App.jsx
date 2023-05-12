@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Home from "./pages/Home";
 import "./reset.css";
 import "./App.css";
+import "./CSS/activityCard.css";
 
 function App() {
   const [culture, setCulture] = useState();
@@ -15,8 +16,8 @@ function App() {
   const [savedCulture, setSavedCulture] = useState([]);
   const [startX, setStartX] = useState(null);
   const [endX, setEndX] = useState(null);
-
   const [foreCast, setForeCast] = useState();
+  const [festival, setFestival] = useState();
 
   return (
     <div className="App">
@@ -41,6 +42,8 @@ function App() {
         setEndX={setEndX}
         foreCast={foreCast}
         setForeCast={setForeCast}
+        festival={festival}
+        setFestival={setFestival}
       />
     </div>
   );
