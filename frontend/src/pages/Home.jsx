@@ -2,6 +2,7 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable react/prop-types */
 import React, { useEffect } from "react";
+// eslint-disable-next-line import/no-extraneous-dependencies
 import axios from "axios";
 import styled from "styled-components";
 import Activities from "../components/Activities";
@@ -12,8 +13,10 @@ import Searchbar from "../components/searchbar/Searchbar";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 // eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies
 import "primereact/resources/primereact.min.css";
+import "./Home.css";
 import weatherCode from "../utils";
 import Map from "../components/map/Map";
+// import FestivalCard from "../components/FestivalCard";
 import "./Home.css";
 
 const BgImg = styled.div`
@@ -46,6 +49,10 @@ function Home({
   setEndX,
   foreCast,
   setForeCast,
+  setCoordUndefined,
+  coordUndefined,
+  festival,
+  setFestival,
 }) {
   function RandomActivities() {
     setCultureRandom(Math.floor(Math.random() * culture.length));
@@ -72,8 +79,15 @@ function Home({
       .then((data) => setRandomActivity(data))
       .catch((error) => console.error(error.message));
   }, []);
-  // console.log(randomActivity);
-  // console.log(culture, cityDataSearch, savedCulture);
+  useEffect(() => {
+    axios
+      .get(
+        `https://data.culture.gouv.fr/api/records/1.0/search/?dataset=festivals-global-festivals-_-pl&q=&rows=10000&refine.code_insee_commune=31555`
+      )
+      .then((data) => setFestival(data.data.records))
+      .catch((error) => console.error(error.message));
+  }, []);
+  console.log(festival);
   return (
     <div className="generalContainer">
       {foreCast
@@ -89,6 +103,7 @@ function Home({
           setCommuneSelectedAdd={setCommuneSelectedAdd}
           communeSelectedAdd={communeSelectedAdd}
           setCityDataSearch={setCityDataSearch}
+          setCoordUndefined={setCoordUndefined}
         />
       </div>
       <Weather
@@ -121,8 +136,13 @@ function Home({
         <RandomActivityCard randomActivity={randomActivity} />
       ) : null} */}
       {cultureIsLoaded && (
-        <Map coord={culture[cultureRandom].fields.coordonnees_gps_lat_lon} />
+        <Map
+          coord={culture[cultureRandom]}
+          coordUndefined={coordUndefined}
+          savedCulture={savedCulture}
+        />
       )}
+      {/* {festival ? <FestivalCard festival={festival[cultureRandom]} /> : null} */}
     </div>
   );
 }

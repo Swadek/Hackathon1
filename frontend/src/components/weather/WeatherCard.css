@@ -61,3 +61,45 @@
 .cityName {
   font-size: 1.2rem;
 }
+
+@media screen and (min-width: 768px) {
+  .city {
+    width: 20%;
+    gap: 8px;
+    padding: 12px 2px;
+  }
+  .cityName {
+    font-size: 1.6rem;
+  }
+
+  .weatherContainer {
+    width: 40%;
+    padding: 16px;
+    gap: 8px;
+  }
+
+  .windInfo img {
+    width: 48px;
+  }
+  .windInfo {
+    gap: 32px;
+  }
+
+  .weatherData img {
+    width: 64px;
+  }
+
+  .windSpeed,
+  .weatherText {
+    font-size: 1.8rem;
+  }
+
+  .weatherData {
+    gap: 24px;
+  }
+
+  .tempMin,
+  .tempMax {
+    font-size: 2.8rem;
+  }
+}
