@@ -18,6 +18,7 @@ function App() {
   const [endX, setEndX] = useState(null);
   const [foreCast, setForeCast] = useState();
   const [festival, setFestival] = useState();
+  const [coordUndefined, setCoordUndefined] = useState([]);
 
   return (
     <div className="App">
@@ -44,6 +45,8 @@ function App() {
         setForeCast={setForeCast}
         festival={festival}
         setFestival={setFestival}
+        setCoordUndefined={setCoordUndefined}
+        coordUndefined={coordUndefined}
       />
     </div>
   );

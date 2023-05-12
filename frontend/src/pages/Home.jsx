@@ -2,6 +2,7 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable react/prop-types */
 import React, { useEffect } from "react";
+// eslint-disable-next-line import/no-extraneous-dependencies
 import axios from "axios";
 import styled from "styled-components";
 import Activities from "../components/Activities";
@@ -12,6 +13,7 @@ import Searchbar from "../components/searchbar/Searchbar";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 // eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies
 import "primereact/resources/primereact.min.css";
+import "./Home.css";
 import weatherCode from "../utils";
 import Map from "../components/map/Map";
 import FestivalCard from "../components/FestivalCard";
@@ -45,6 +47,8 @@ function Home({
   setEndX,
   foreCast,
   setForeCast,
+  setCoordUndefined,
+  coordUndefined,
   festival,
   setFestival,
 }) {
@@ -97,6 +101,7 @@ function Home({
           setCommuneSelectedAdd={setCommuneSelectedAdd}
           communeSelectedAdd={communeSelectedAdd}
           setCityDataSearch={setCityDataSearch}
+          setCoordUndefined={setCoordUndefined}
         />
       </div>
       <Weather
@@ -125,7 +130,7 @@ function Home({
         <RandomActivityCard randomActivity={randomActivity} />
       ) : null}
       {cultureIsLoaded && (
-        <Map coord={culture[cultureRandom].fields.coordonnees_gps_lat_lon} />
+        <Map coord={culture[cultureRandom]} coordUndefined={coordUndefined} />
       )}
       {festival ? <FestivalCard festival={festival[cultureRandom]} /> : null}
     </div>

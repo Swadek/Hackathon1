@@ -8,13 +8,21 @@ import "./Map.css";
 export default function Map({ coord }) {
   return (
     <div>
-      <MapContainer key={coord.toString()} center={coord} zoom={15}>
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        <Marker position={coord} />
-      </MapContainer>
+      {coord ? (
+        <div>
+          <MapContainer
+            key={coord.fields.coordonnees_gps_lat_lon.toString()}
+            center={coord.fields.coordonnees_gps_lat_lon}
+            zoom={15}
+          >
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <Marker position={coord.fields.coordonnees_gps_lat_lon} />
+          </MapContainer>
+        </div>
+      ) : null}
     </div>
   );
 }
