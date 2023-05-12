@@ -4,7 +4,7 @@ import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "./Map.css";
 
-export default function Map({ coord }) {
+export default function Map({ coord, coordUndefined }) {
   return (
     <div>
       {coord ? (
@@ -21,7 +21,21 @@ export default function Map({ coord }) {
             <Marker position={coord.fields.coordonnees_gps_lat_lon} />
           </MapContainer>
         </div>
-      ) : null}
+      ) : (
+        <div>
+          <MapContainer
+            key={coordUndefined.toString()}
+            center={coordUndefined}
+            zoom={15}
+          >
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <Marker position={coordUndefined} />
+          </MapContainer>
+        </div>
+      )}
     </div>
   );
 }
