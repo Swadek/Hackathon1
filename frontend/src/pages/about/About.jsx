@@ -12,11 +12,11 @@ function About() {
             <div className="navbar">
               <img
                 className="logoHackathon"
-                src="./assets/logo.png"
+                src="./assets/logo_aleactivite.svg"
                 alt="logo"
               />
             </div>
-            <h2 className="titleAPropos">AléActivité</h2>
+            <h2 className="titleAPropos">Aléactivité</h2>
           </div>
           <p>
             Bienvenue sur notre site internet permettant de trouver des idées
