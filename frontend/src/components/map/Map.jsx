@@ -28,7 +28,6 @@ export default function Map({ coord, coordUndefined, savedCulture }) {
             <Marker position={coord.fields.coordonnees_gps_lat_lon} />
             {savedCulture.length > 0
               ? savedCulture.map((el) => {
-                  console.log(el.fields.coordonnees_gps_lat_lon);
                   return (
                     <div key={el.recordid}>
                       <Marker

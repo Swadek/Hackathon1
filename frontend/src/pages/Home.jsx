@@ -83,7 +83,7 @@ function Home({
       .get(`http://www.boredapi.com/api/activity/`)
       .then((data) => setRandomActivity(data))
       .catch((error) => console.error(error.message));
-  }, [communeSelectedAdd]);
+  }, [communeSelectedAdd, cultureRandom]);
   useEffect(() => {
     axios
       .get(
@@ -92,7 +92,6 @@ function Home({
       .then((data) => setFestival(data.data.records))
       .catch((error) => console.error(error.message));
   }, [communeSelectedAdd]);
-  console.log(inOut, actualWeather);
   return (
     <div>
       {foreCast
