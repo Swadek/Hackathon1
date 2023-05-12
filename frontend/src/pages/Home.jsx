@@ -18,6 +18,8 @@ import "./Home.css";
 import weatherCode from "../utils";
 import Map from "../components/map/Map";
 import FestivalCard from "../components/FestivalCard";
+import Footer from "../components/footer/footer";
+import "../components/footer/footer.css";
 
 const BgImg = styled.div`
   background: url(${({ url }) => url});
@@ -78,7 +80,6 @@ function Home({
       .then((res) => {
         setCulture(res.data.records);
         setCultureIsLoaded(true);
-        console.log(res.data.records);
       })
       .catch((error) => console.error(error.message));
   }, [communeSelectedAdd]);
@@ -96,6 +97,7 @@ function Home({
       .then((data) => setFestival(data.data.records))
       .catch((error) => console.error(error.message));
   }, [communeSelectedAdd]);
+
   return (
     <div className="generalContainer">
       {foreCast
@@ -175,6 +177,10 @@ function Home({
           savedCulture={savedCulture}
         />
       )}
+      <div className="component-footer">
+        {" "}
+        <Footer />
+      </div>
     </div>
   );
 }
