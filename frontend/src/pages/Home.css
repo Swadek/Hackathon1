@@ -2,3 +2,6 @@
   position: absolute;
   z-index: -1;
 }
+.SearchBar {
+padding: 2rem;
+}
