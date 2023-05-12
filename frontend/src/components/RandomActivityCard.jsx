@@ -7,7 +7,7 @@ function RandomActivityCard({ randomActivity, setRandomActivity }) {
   const { data } = randomActivity;
   return (
     <Card className="randomCardActivity">
-      <p className="p-card-title">{data.activity}</p>
+      <p className="p-card-title-2">{data.activity}</p>
     </Card>
   );
 }
