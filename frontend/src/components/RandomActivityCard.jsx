@@ -8,10 +8,6 @@ function RandomActivityCard({ randomActivity, setRandomActivity }) {
   return (
     <Card className="randomCardActivity">
       <p className="p-card-title">{data.activity}</p>
-      <p className="p-card-subtitle">Type d'activité: {data.type}</p>
-      <p className="p-card-subtitle">
-        Nombre de participants: {data.participants}
-      </p>
     </Card>
   );
 }
