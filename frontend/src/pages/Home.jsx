@@ -8,7 +8,7 @@ import axios from "axios";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import styled from "styled-components";
 import Activities from "../components/Activities";
-// import RandomActivityCard from "../components/RandomActivityCard/RandomActivityCard";
+import RandomActivityCard from "../components/RandomActivityCard";
 import Weather from "../components/weather/Weather";
 import Searchbar from "../components/searchbar/Searchbar";
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -58,6 +58,8 @@ function Home({
   setInOut,
   actualWeather,
   setActualWeather,
+  isHovered,
+  setIsHovered,
 }) {
   function RandomActivities() {
     setCultureRandom(Math.floor(Math.random() * culture.length));
@@ -87,7 +89,7 @@ function Home({
       .get(`http://www.boredapi.com/api/activity/`)
       .then((data) => setRandomActivity(data))
       .catch((error) => console.error(error.message));
-  }, [cultureRandom]);
+  }, [cultureRandom, isHovered]);
   useEffect(() => {
     axios
       .get(
@@ -175,7 +177,11 @@ function Home({
         />
       )}
       {randomActivity ? (
-        <RandomActivityCard randomActivity={randomActivity} />
+        <RandomActivityCard
+          randomActivity={randomActivity}
+          setRandomActivity={setRandomActivity}
+          setIsHovered={setIsHovered}
+        />
       ) : null}
     </div>
   );

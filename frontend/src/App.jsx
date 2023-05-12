@@ -21,6 +21,7 @@ function App() {
   const [coordUndefined, setCoordUndefined] = useState([]);
   const [inOut, setInOut] = useState(true);
   const [actualWeather, setActualWeather] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <div className="App">
@@ -53,6 +54,8 @@ function App() {
         setInOut={setInOut}
         actualWeather={actualWeather}
         setActualWeather={setActualWeather}
+        isHovered={isHovered}
+        setIsHovered={setIsHovered}
       />
     </div>
   );
