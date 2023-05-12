@@ -18,7 +18,8 @@ import "./Home.css";
 import weatherCode from "../utils";
 import Map from "../components/map/Map";
 import FestivalCard from "../components/FestivalCard";
-// import Footer from "../components/footer/Footer";
+import Footer from "../components/footer/footer";
+import "../components/footer/footer.css";
 
 const BgImg = styled.div`
   background: url(${({ url }) => url});
@@ -176,7 +177,10 @@ function Home({
           savedCulture={savedCulture}
         />
       )}
-      {/* <Footer /> */}
+      <div className="component-footer">
+        {" "}
+        <Footer />
+      </div>
     </div>
   );
 }

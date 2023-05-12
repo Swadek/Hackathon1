@@ -1,5 +1,7 @@
 import React from "react";
 import "./About.css";
+import Footer from "../../components/footer/footer";
+import "../../components/footer/footer.css";
 
 function About() {
   return (
@@ -7,8 +9,14 @@ function About() {
       <section>
         <div className="aboutHackathon">
           <div>
-            <img className="logoHackathon" src="./assets/logo.svg" alt="logo" />
-            <h2 className="titleAPropos">Hackathon 1</h2>
+            <div className="navbar">
+              <img
+                className="logoHackathon"
+                src="./assets/logo.png"
+                alt="logo"
+              />
+            </div>
+            <h2 className="titleAPropos">AléActivité</h2>
           </div>
           <p>
             Bienvenue sur notre site internet permettant de trouver des idées
@@ -20,7 +28,7 @@ function About() {
             votre choix.
           </p>
         </div>
-        <div className="aboutAPi">
+        <div className="aboutAPI">
           <div>
             <h2 className="titleAPropos"> Ressources utilisées </h2>
           </div>
@@ -29,7 +37,7 @@ function About() {
             récupérer les données:
           </p>
           <ul>
-            <li>
+            <li className="api">
               <a
                 href="http://www.boredapi.com/api/activity/"
                 target="_blank"
@@ -38,7 +46,7 @@ function About() {
                 BoredAPI : Idées d'activités ludique
               </a>
             </li>
-            <li>
+            <li className="api">
               <a
                 href="https://leafletjs.com/"
                 target="_blank"
@@ -47,7 +55,7 @@ function About() {
                 LEAFLET MAP
               </a>
             </li>
-            <li>
+            <li className="api">
               <a
                 href="https://api.gouv.fr/documentation/api-geo"
                 target="_blank"
@@ -56,7 +64,7 @@ function About() {
                 API Découpage Administratif - (API Geo)
               </a>
             </li>
-            <li>
+            <li className="api">
               <a
                 href="https://data.culture.gouv.fr/api/records/1.0/search/?dataset=festivals-global-festivals-_-pl"
                 target="_blank"
@@ -65,7 +73,7 @@ function About() {
                 API Culture.gouv : tous les Festivals
               </a>
             </li>
-            <li>
+            <li className="api">
               <a
                 href="https://api.meteo-concept.com/api/forecast"
                 target="_blank"
@@ -135,6 +143,10 @@ function About() {
           </p>
         </div>
       </section>
+      <div className="component-footer">
+        {" "}
+        <Footer />
+      </div>
     </div>
   );
 }
