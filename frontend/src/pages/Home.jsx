@@ -63,7 +63,10 @@ function Home({
     setInOut(!inOut);
   }
   function SaveActivities() {
-    setSavedCulture([...savedCulture, culture[cultureRandom]]);
+    setSavedCulture([
+      ...savedCulture,
+      inOut ? culture[cultureRandom] : festival[cultureRandom],
+    ]);
     setCultureRandom(Math.floor(Math.random() * culture.length));
     setInOut(!inOut);
   }
@@ -75,7 +78,6 @@ function Home({
       .then((res) => {
         setCulture(res.data.records);
         setCultureIsLoaded(true);
-        console.log(res.data.records);
       })
       .catch((error) => console.error(error.message));
   }, [communeSelectedAdd]);
@@ -84,7 +86,7 @@ function Home({
       .get(`http://www.boredapi.com/api/activity/`)
       .then((data) => setRandomActivity(data))
       .catch((error) => console.error(error.message));
-  }, [communeSelectedAdd]);
+  }, [communeSelectedAdd, cultureRandom]);
   useEffect(() => {
     axios
       .get(
@@ -93,7 +95,7 @@ function Home({
       .then((data) => setFestival(data.data.records))
       .catch((error) => console.error(error.message));
   }, [communeSelectedAdd]);
-  console.log(inOut, actualWeather);
+
   return (
     <div className="generalContainer">
       {foreCast
@@ -132,7 +134,16 @@ function Home({
               SaveActivities={() => SaveActivities()}
             />
           ) : inOut ? (
-            <FestivalCard festival={festival[cultureRandom]} />
+            <FestivalCard
+              festival={festival[cultureRandom]}
+              culture={culture[cultureRandom]}
+              startX={startX}
+              setStartX={setStartX}
+              endX={endX}
+              setEndX={setEndX}
+              RandomActivities={() => RandomActivities()}
+              SaveActivities={() => SaveActivities()}
+            />
           ) : (
             <Activities
               culture={culture[cultureRandom]}
