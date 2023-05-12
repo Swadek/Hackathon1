@@ -13,6 +13,7 @@ import "primereact/resources/themes/lara-light-indigo/theme.css";
 // eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies
 import "primereact/resources/primereact.min.css";
 import weatherCode from "../utils";
+import Map from "../components/map/Map";
 
 const BgImg = styled.div`
   background: url(${({ url }) => url});
@@ -59,6 +60,7 @@ function Home({
       .then((res) => {
         setCulture(res.data.records);
         setCultureIsLoaded(true);
+        console.log(res.data.records);
       })
       .catch((error) => console.error(error.message));
   }, [communeSelectedAdd]);
@@ -68,8 +70,8 @@ function Home({
       .then((data) => setRandomActivity(data))
       .catch((error) => console.error(error.message));
   }, []);
-  console.log(randomActivity);
-  console.log(culture, cityDataSearch, savedCulture);
+  // console.log(randomActivity);
+  // console.log(culture, cityDataSearch, savedCulture);
   return (
     <div>
       {foreCast
@@ -112,6 +114,9 @@ function Home({
       {randomActivity ? (
         <RandomActivityCard randomActivity={randomActivity} />
       ) : null}
+      {cultureIsLoaded && (
+        <Map coord={culture[cultureRandom].fields.coordonnees_gps_lat_lon} />
+      )}
     </div>
   );
 }

@@ -17,6 +17,7 @@ function App() {
   const [endX, setEndX] = useState(null);
 
   const [foreCast, setForeCast] = useState();
+
   return (
     <div className="App">
       <Home
