@@ -19,6 +19,8 @@ function App() {
   const [foreCast, setForeCast] = useState();
   const [festival, setFestival] = useState();
   const [coordUndefined, setCoordUndefined] = useState([]);
+  const [inOut, setInOut] = useState(true);
+  const [actualWeather, setActualWeather] = useState(false);
 
   return (
     <div className="App">
@@ -47,6 +49,10 @@ function App() {
         setFestival={setFestival}
         setCoordUndefined={setCoordUndefined}
         coordUndefined={coordUndefined}
+        inOut={inOut}
+        setInOut={setInOut}
+        actualWeather={actualWeather}
+        setActualWeather={setActualWeather}
       />
     </div>
   );

@@ -14,16 +14,15 @@
   height: auto;
   width: auto;
   height: 40px;
-  left: calc(50% - 213px/2);
+  left: calc(50% - 213px / 2);
 
-  background: #FFFFFF;
+  background: #ffffff;
   border: 2px solid rgba(0, 0, 0, 0.2);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 50px;
 }
 
 .searchBar {
-
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -32,16 +31,14 @@
   width: 70%;
   background-color: transparent;
   font-size: 1.1rem;
-
 }
 
 input.searchBar:focus {
   outline: none;
-
 }
 
 input.searchBar::placeholder {
-  text-align: left; 
+  text-align: left;
   font-size: 1.1rem;
 }
 
@@ -59,12 +56,12 @@ input.searchBar::placeholder {
   top: 40px;
 }
 
-.suggestion{
+.suggestion {
   padding: 4px 8px;
 }
 
 .suggestion:hover {
-background-color: rgba(0, 0, 0, 0.6);
-color: white;
-cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  cursor: pointer;
 }
