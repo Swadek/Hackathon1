@@ -23,10 +23,6 @@ function RandomActivityCard({ randomActivity, setIsHovered }) {
         >
           <Card className="randomCardActivity cardActivity cardActivityRandom back">
             <p className="p-card-title-2">{data.activity}</p>
-            <p className="p-card-subtitle">Type d'activité: {data.type}</p>
-            <p className="p-card-subtitle">
-              Nombre de participants: {data.participants}
-            </p>
           </Card>
           <Card className="randomCardActivity cardActivity cardActivityRandom front">
             <p className="p-card-title">Trouver une activité</p>
