@@ -6,7 +6,7 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import Activities from "../components/Activities";
-import RandomActivityCard from "../components/RandomActivityCard/RandomActivityCard";
+import RandomActivityCard from "../components/RandomActivityCard";
 import Weather from "../components/weather/Weather";
 import Searchbar from "../components/searchbar/Searchbar";
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -16,6 +16,7 @@ import "primereact/resources/primereact.min.css";
 import "./Home.css";
 import weatherCode from "../utils";
 import Map from "../components/map/Map";
+import FestivalCard from "../components/FestivalCard";
 
 const BgImg = styled.div`
   background: url(${({ url }) => url});
@@ -48,6 +49,8 @@ function Home({
   setForeCast,
   setCoordUndefined,
   coordUndefined,
+  festival,
+  setFestival,
 }) {
   function RandomActivities() {
     setCultureRandom(Math.floor(Math.random() * culture.length));
@@ -74,6 +77,15 @@ function Home({
       .then((data) => setRandomActivity(data))
       .catch((error) => console.error(error.message));
   }, []);
+  useEffect(() => {
+    axios
+      .get(
+        `https://data.culture.gouv.fr/api/records/1.0/search/?dataset=festivals-global-festivals-_-pl&q=&rows=10000&refine.code_insee_commune=31555`
+      )
+      .then((data) => setFestival(data.data.records))
+      .catch((error) => console.error(error.message));
+  }, []);
+  console.log(festival);
   return (
     <div>
       {foreCast
@@ -120,6 +132,7 @@ function Home({
       {cultureIsLoaded && (
         <Map coord={culture[cultureRandom]} coordUndefined={coordUndefined} />
       )}
+      {festival ? <FestivalCard festival={festival[cultureRandom]} /> : null}
     </div>
   );
 }
