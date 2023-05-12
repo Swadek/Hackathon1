@@ -53,7 +53,11 @@ export default function Map({ coord, coordUndefined, savedCulture }) {
                         icon={customIcon}
                       >
                         <Popup>
-                          <p>{el.fields.nom}</p>
+                          <p>
+                            {el.fields.coordonnees_gps_lat_lon
+                              ? el.fields.nom
+                              : el.fields.nom_du_festival}
+                          </p>
                         </Popup>
                       </Marker>
                     </div>
