@@ -53,6 +53,7 @@ input.searchBar::placeholder {
   position: absolute;
   background-color: white;
   top: 40px;
+  z-index: 99;
 }
 
 .suggestion {
