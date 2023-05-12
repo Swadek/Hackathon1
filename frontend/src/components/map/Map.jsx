@@ -30,9 +30,8 @@ export default function Map({ coord, coordUndefined, savedCulture }) {
               ? savedCulture.map((el) => {
                   console.log(el.fields.coordonnees_gps_lat_lon);
                   return (
-                    <div>
+                    <div key={el.recordid}>
                       <Marker
-                        key={el.recordid}
                         position={el.fields.coordonnees_gps_lat_lon}
                         icon={customIcon}
                       >
