@@ -4,6 +4,7 @@
 import React, { useEffect } from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import axios from "axios";
+// eslint-disable-next-line import/no-extraneous-dependencies
 import styled from "styled-components";
 import Activities from "../components/Activities";
 import RandomActivityCard from "../components/RandomActivityCard";
@@ -126,9 +127,7 @@ function Home({
       ) : (
         <p>Loading</p>
       )}
-      {randomActivity ? (
-        <RandomActivityCard randomActivity={randomActivity} />
-      ) : null}
+
       {cultureIsLoaded && (
         <Map
           coord={culture[cultureRandom]}
@@ -137,6 +136,9 @@ function Home({
         />
       )}
       {festival ? <FestivalCard festival={festival[cultureRandom]} /> : null}
+      {randomActivity ? (
+        <RandomActivityCard randomActivity={randomActivity} />
+      ) : null}
     </div>
   );
 }

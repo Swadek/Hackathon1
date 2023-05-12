@@ -4,6 +4,24 @@
 .p-cardActivity {
   margin-bottom: 0.5rem;
 }
+.cardActivityRandom {
+  backface-visibility: hidden;
+  transition: transform 1s linear 0s;
+  position: absolute;
+}
+.cardActivityRandomRotate > .front {
+  transform: perspective(900px) rotateY(0deg);
+}
+.cardActivityRandomRotate > .back {
+  transform: perspective(900px) rotateY(180deg);
+  z-index: 1;
+}
+.cardActivityRandomRotate:hover > .front {
+  transform: perspective(900px) rotateY(-180deg);
+}
+.cardActivityRandomRotate:hover > .back {
+  transform: perspective(900px) rotateY(0deg);
+}
 @media screen and (min-width: 768px) {
   .cardActivity {
     width: 60dvw;
