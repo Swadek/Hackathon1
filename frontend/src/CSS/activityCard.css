@@ -1,9 +1,11 @@
 .cardActivity {
   margin: 10px;
 }
+.p-cardActivity {
+  margin-bottom: 0.5rem;
+}
 @media screen and (min-width: 768px) {
   .cardActivity {
     width: 60dvw;
-    margin: auto;
   }
 }
