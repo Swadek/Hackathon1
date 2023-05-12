@@ -7,7 +7,7 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import Activities from "../components/Activities";
-// import RandomActivityCard from "../components/RandomActivityCard/RandomActivityCard";
+import RandomActivityCard from "../components/RandomActivityCard";
 import Weather from "../components/weather/Weather";
 import Searchbar from "../components/searchbar/Searchbar";
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -41,7 +41,7 @@ function Home({
   setCityDataSearch,
   cultureIsLoaded,
   setCultureIsLoaded,
-  // randomActivity,
+  randomActivity,
   setRandomActivity,
   savedCulture,
   setSavedCulture,
@@ -157,19 +157,17 @@ function Home({
               SaveActivities={() => SaveActivities()}
             />
           )}
-          <button className="buttons" onClick={() => RandomActivities()}>
-            Next
-          </button>
-          <button className="buttons" onClick={() => SaveActivities()}>
-            Save
-          </button>
+          <div className="buttons">
+            <button onClick={() => RandomActivities()}>Next</button>
+            <button onClick={() => SaveActivities()}>Save</button>
+          </div>
         </div>
       ) : (
         <p>Loading</p>
       )}
-      {/* {randomActivity ? (
+      {randomActivity ? (
         <RandomActivityCard randomActivity={randomActivity} />
-      ) : null} */}
+      ) : null}
       {cultureIsLoaded && (
         <Map
           coord={culture[cultureRandom]}
