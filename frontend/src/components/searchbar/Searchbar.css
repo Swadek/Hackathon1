@@ -8,7 +8,6 @@
 
 .search-inner {
   box-sizing: border-box;
-
   display: flex;
   justify-content: center;
   height: auto;
@@ -54,6 +53,7 @@ input.searchBar::placeholder {
   position: absolute;
   background-color: white;
   top: 40px;
+  z-index: 99;
 }
 
 .suggestion {
@@ -69,10 +69,11 @@ input.searchBar::placeholder {
 @media screen and (min-width: 768px) {
   .search-inner {
     height: 48px;
+    width: 30vw;
   }
   input.searchBar::placeholder {
     font-size: 1.4rem;
-    padding-left: 0.6rem;
+    padding-left: 4rem;
   }
   input.searchBar {
     margin-left: 1rem;

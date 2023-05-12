@@ -42,14 +42,17 @@
 @media screen and (min-width: 768px) {
   .cardActivity {
     width: 30vw;
+    height: 25vh;
   }
   .card .p-card-title {
-    font-size: 2rem;
+    font-size: 2.6rem;
+    margin-bottom: 1rem;
   }
   .card .p-card-subtitle {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
   }
   .card .p-cardActivity {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
   }
 }

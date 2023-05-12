@@ -1,8 +1,8 @@
 .map-container {
-  height: 50vh;
+  height: calc(50vh - 30px);
   width: 100%;
   position: absolute;
-  top: 50vh;
+  bottom: 30px;
 }
 
 .leaflet-container {
