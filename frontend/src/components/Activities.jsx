@@ -48,8 +48,8 @@ function Activities({
             <p className="p-card-subtitle">
               {culture.fields.type_equipement_ou_lieu}
             </p>
-            <p className="card-p1">{culture.fields.nom}</p>
-            <p className="card-p2">{culture.fields.adresse_postale}</p>
+            <p className="p-cardActivity">{culture.fields.nom}</p>
+            <p className="p-cardActivity">{culture.fields.adresse_postale}</p>
           </Card>
         </div>
       ) : (
