@@ -7,7 +7,11 @@ import "./Searchbar.css";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import "primeicons/primeicons.css";
 
-function Searchbar({ setCommuneSelectedAdd, setCityDataSearch }) {
+function Searchbar({
+  setCommuneSelectedAdd,
+  setCityDataSearch,
+  setCoordUndefined,
+}) {
   const [commune, setCommune] = useState("");
   const [isLoaded, setIsLoaded] = useState(false);
   const [searchInputValue, setSearchInputValue] = useState("");
@@ -20,6 +24,10 @@ function Searchbar({ setCommuneSelectedAdd, setCityDataSearch }) {
     setCityDataSearch(code); // Add commune name to the table
   };
 
+  const handleAddCoord = (code) => {
+    setCoordUndefined(code); // Add coord to the table
+  };
+
   const handleSearch = (e) => {
     e.preventDefault();
     setSearchInputValue(e.target.value);
@@ -29,7 +37,7 @@ function Searchbar({ setCommuneSelectedAdd, setCityDataSearch }) {
   const onSearchCodePostal = (communeName, codePostal) => {
     axios
       .get(
-        `https://geo.api.gouv.fr/communes?nom=${communeName}&codePostal=${codePostal}&fields=code,nom,contour,codesPostaux,population`
+        `https://geo.api.gouv.fr/communes?nom=${communeName}&codePostal=${codePostal}&fields=code,nom,centre,codesPostaux,population`
       )
       .then((res) => {
         const filteredResults = res.data.filter(
@@ -54,6 +62,9 @@ function Searchbar({ setCommuneSelectedAdd, setCityDataSearch }) {
 
         const citySearch = insee;
         handleAddCitySearch(citySearch);
+
+        const coordSearch = res.data[0].centre.coordinates.reverse();
+        handleAddCoord(coordSearch);
       })
 
       .catch((err) => {

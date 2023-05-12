@@ -4,14 +4,26 @@
 import React, { useEffect } from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import axios from "axios";
+import styled from "styled-components";
 import Activities from "../components/Activities";
+import RandomActivityCard from "../components/RandomActivityCard/RandomActivityCard";
 import Weather from "../components/weather/Weather";
 import Searchbar from "../components/searchbar/Searchbar";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import "primereact/resources/themes/lara-light-indigo/theme.css";
-// eslint-disable-next-line import/no-extraneous-dependencies
+// eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies
 import "primereact/resources/primereact.min.css";
 import "./Home.css";
+import weatherCode from "../utils";
+import Map from "../components/map/Map";
+
+const BgImg = styled.div`
+  background: url(${({ url }) => url});
+  height: 50vh;
+  width: 100vw;
+  position: absolute;
+  z-index: -1;
+`;
 
 function Home({
   culture,
@@ -24,8 +36,24 @@ function Home({
   setCityDataSearch,
   cultureIsLoaded,
   setCultureIsLoaded,
+  randomActivity,
+  setRandomActivity,
+  savedCulture,
+  setSavedCulture,
+  startX,
+  setStartX,
+  endX,
+  setEndX,
+  foreCast,
+  setForeCast,
+  setCoordUndefined,
+  coordUndefined,
 }) {
   function RandomActivities() {
+    setCultureRandom(Math.floor(Math.random() * culture.length));
+  }
+  function SaveActivities() {
+    setSavedCulture([...savedCulture, culture[cultureRandom]]);
     setCultureRandom(Math.floor(Math.random() * culture.length));
   }
   useEffect(() => {
@@ -36,26 +64,61 @@ function Home({
       .then((res) => {
         setCulture(res.data.records);
         setCultureIsLoaded(true);
+        console.log(res.data.records);
       })
       .catch((error) => console.error(error.message));
   }, [communeSelectedAdd]);
+  useEffect(() => {
+    axios
+      .get(`http://www.boredapi.com/api/activity/`)
+      .then((data) => setRandomActivity(data))
+      .catch((error) => console.error(error.message));
+  }, []);
   return (
     <div>
-      <Weather cityDataSearch={cityDataSearch} />
-      <div className="searchBarButtonArrayResults">
+      {foreCast
+        ? weatherCode.map((el) => {
+            return el.code === foreCast.weather ? (
+              <BgImg key={el.code} url={el.urlbg} />
+            ) : null;
+          })
+        : null}
+
+      <div className="SearchBar">
         <Searchbar
           setCommuneSelectedAdd={setCommuneSelectedAdd}
           communeSelectedAdd={communeSelectedAdd}
           setCityDataSearch={setCityDataSearch}
+          setCoordUndefined={setCoordUndefined}
         />
       </div>
+      <Weather
+        cityDataSearch={cityDataSearch}
+        foreCast={foreCast}
+        setForeCast={setForeCast}
+      />
       {cultureIsLoaded ? (
         <div>
-          <Activities culture={culture[cultureRandom]} />
+          <Activities
+            culture={culture[cultureRandom]}
+            startX={startX}
+            setStartX={setStartX}
+            endX={endX}
+            setEndX={setEndX}
+            RandomActivities={() => RandomActivities()}
+            SaveActivities={() => SaveActivities()}
+          />
           <button onClick={() => RandomActivities()}>Next</button>
+          <button onClick={() => SaveActivities()}>Save</button>
         </div>
       ) : (
         <p>Loading</p>
+      )}
+      {randomActivity ? (
+        <RandomActivityCard randomActivity={randomActivity} />
+      ) : null}
+      {cultureIsLoaded && (
+        <Map coord={culture[cultureRandom]} coordUndefined={coordUndefined} />
       )}
     </div>
   );
