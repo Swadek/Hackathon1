@@ -6,21 +6,22 @@
 }
 .cardActivityRandom {
   backface-visibility: hidden;
-  transition: transform 1s linear 0s;
+  transition: transform 0.5s linear 0s;
   position: absolute;
+  height: 160px;
 }
 .cardActivityRandomRotate > .front {
-  transform: perspective(900px) rotateY(0deg);
+  transform: perspective(1000px) rotateY(0deg);
 }
 .cardActivityRandomRotate > .back {
-  transform: perspective(900px) rotateY(180deg);
+  transform: perspective(1000px) rotateY(180deg);
   z-index: 1;
 }
 .cardActivityRandomRotate:hover > .front {
-  transform: perspective(900px) rotateY(-180deg);
+  transform: perspective(1000px) rotateY(-180deg);
 }
 .cardActivityRandomRotate:hover > .back {
-  transform: perspective(900px) rotateY(0deg);
+  transform: perspective(1000px) rotateY(0deg);
 }
 @media screen and (min-width: 768px) {
   .cardActivity {

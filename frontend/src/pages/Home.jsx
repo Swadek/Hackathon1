@@ -84,7 +84,7 @@ function Home({
       .get(`http://www.boredapi.com/api/activity/`)
       .then((data) => setRandomActivity(data))
       .catch((error) => console.error(error.message));
-  }, [communeSelectedAdd]);
+  }, []);
   useEffect(() => {
     axios
       .get(
