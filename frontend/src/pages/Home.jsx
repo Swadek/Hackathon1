@@ -84,7 +84,7 @@ function Home({
       .get(`http://www.boredapi.com/api/activity/`)
       .then((data) => setRandomActivity(data))
       .catch((error) => console.error(error.message));
-  }, [communeSelectedAdd]);
+  }, [communeSelectedAdd, cultureRandom]);
   useEffect(() => {
     axios
       .get(
@@ -132,7 +132,16 @@ function Home({
               SaveActivities={() => SaveActivities()}
             />
           ) : inOut ? (
-            <FestivalCard festival={festival[cultureRandom]} />
+            <FestivalCard
+              festival={festival[cultureRandom]}
+              culture={culture[cultureRandom]}
+              startX={startX}
+              setStartX={setStartX}
+              endX={endX}
+              setEndX={setEndX}
+              RandomActivities={() => RandomActivities()}
+              SaveActivities={() => SaveActivities()}
+            />
           ) : (
             <Activities
               culture={culture[cultureRandom]}
