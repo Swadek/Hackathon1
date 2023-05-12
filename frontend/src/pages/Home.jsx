@@ -85,7 +85,7 @@ function Home({
   }, [communeSelectedAdd]);
   useEffect(() => {
     axios
-      .get(`http://www.boredapi.com/api/activity/`)
+      .get(`https://www.boredapi.com/api/activity/`)
       .then((data) => setRandomActivity(data))
       .catch((error) => console.error(error.message));
   }, [communeSelectedAdd, cultureRandom]);

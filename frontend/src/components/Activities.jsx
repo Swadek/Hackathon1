@@ -20,6 +20,7 @@ function Activities({
   }
   function handleTouchMove(e) {
     setEndX(e.touches[0].clientX);
+    console.log(startX);
   }
   function handleTouchEnd() {
     if (startX && endX) {
