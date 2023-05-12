@@ -2,12 +2,16 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable react/prop-types */
 import React, { useEffect } from "react";
+// eslint-disable-next-line import/no-extraneous-dependencies
 import axios from "axios";
 import Activities from "../components/Activities";
 import Weather from "../components/weather/Weather";
 import Searchbar from "../components/searchbar/Searchbar";
+// eslint-disable-next-line import/no-extraneous-dependencies
 import "primereact/resources/themes/lara-light-indigo/theme.css";
+// eslint-disable-next-line import/no-extraneous-dependencies
 import "primereact/resources/primereact.min.css";
+import "./Home.css";
 
 function Home({
   culture,
@@ -35,24 +39,15 @@ function Home({
       })
       .catch((error) => console.error(error.message));
   }, [communeSelectedAdd]);
-  console.log(culture, cityDataSearch);
   return (
     <div>
       <Weather cityDataSearch={cityDataSearch} />
-      <div className="SearchBar">
+      <div className="searchBarButtonArrayResults">
         <Searchbar
           setCommuneSelectedAdd={setCommuneSelectedAdd}
           communeSelectedAdd={communeSelectedAdd}
           setCityDataSearch={setCityDataSearch}
         />
-
-        <div>
-          <ul>
-            {communeSelectedAdd.map((name) => (
-              <li key={name}>{name}</li>
-            ))}
-          </ul>
-        </div>
       </div>
       {cultureIsLoaded ? (
         <div>

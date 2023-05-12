@@ -3,6 +3,9 @@
 import React, { useState, useEffect } from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import axios from "axios";
+import "./Searchbar.css";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import "primeicons/primeicons.css";
 
 function Searchbar({ setCommuneSelectedAdd, setCityDataSearch }) {
   const [commune, setCommune] = useState("");
@@ -84,72 +87,68 @@ function Searchbar({ setCommuneSelectedAdd, setCityDataSearch }) {
   return (
     <div>
       {isLoaded ? (
-        <div>
-          <div className="search-container">
-            <div className="search-inner">
-              <input
-                type="text"
-                placeholder="Commune / Code Postal"
-                onChange={handleSearch}
-                value={searchInputValue}
-              />
-            </div>
-            <div className="dropdown">
-              {/* 
-Allows you to display a pre-searche */}
-              {commune
-                .filter((item) => {
-                  const communeName = item.nom.toLowerCase();
-                  const searchInputValueLower = searchInputValue.toLowerCase();
-                  const matchName = communeName.startsWith(
-                    searchInputValueLower
-                  );
-                  // Search if one of element correspond to code postal
-                  const matchCodePostal = item.codesPostaux.some((postal) =>
-                    postal.startsWith(searchInputValueLower)
-                  );
-                  return (
-                    searchInputValueLower && (matchName || matchCodePostal)
-                  );
-                })
-                .map((item) => (
-                  <div className="dropdown-row" key={item.code}>
-                    {regEx.test(searchInputValue)
-                      ? item.codesPostaux
-                          .filter((postal) =>
-                            postal.startsWith(searchInputValue.toLowerCase())
-                          )
-                          .map((postal) => (
-                            <div
-                              key={postal}
-                              onClick={() => {
-                                onSearchInputValue(`${item.nom} - ${postal}`);
-                              }}
-                              onKeyDown={() => {}}
-                              role="button"
-                              tabIndex="0"
-                            >
-                              {`${item.nom} - ${postal}`}
-                            </div>
-                          ))
-                      : item.codesPostaux.map((postal, index) => (
+        <div className="searchbar-content">
+          <div className="search-inner">
+            <img src="./assets/ic_sharp-search.svg" alt="search icon" />
+            <input
+              className="searchBar"
+              type="text"
+              placeholder="Localisation"
+              onChange={handleSearch}
+              value={searchInputValue}
+            />
+          </div>
+          <div className="dropdown">
+            {commune
+              .filter((item) => {
+                const communeName = item.nom.toLowerCase();
+                const searchInputValueLower = searchInputValue.toLowerCase();
+                const matchName = communeName.startsWith(searchInputValueLower);
+                // Search if one of element correspond to code postal
+                const matchCodePostal = item.codesPostaux.some((postal) =>
+                  postal.startsWith(searchInputValueLower)
+                );
+                return searchInputValueLower && (matchName || matchCodePostal);
+              })
+              .map((item) => (
+                <div className="dropdown-row" key={item.code}>
+                  {regEx.test(searchInputValue)
+                    ? item.codesPostaux
+                        .filter((postal) =>
+                          postal.startsWith(searchInputValue.toLowerCase())
+                        )
+                        .map((postal) => (
                           <div
-                            key={item.codesPostaux[index]}
+                            className="suggestion"
+                            key={postal}
                             onClick={() => {
-                              onSearchInputValue(
-                                `${item.nom} - ${item.codesPostaux[index]}`
-                              );
+                              onSearchInputValue(`${item.nom} - ${postal}`);
                             }}
                             onKeyDown={() => {}}
                             role="button"
                             tabIndex="0"
                           >
-                            {`${item.nom} - ${item.codesPostaux[index]}`}
+                            {`${item.nom} - ${postal}`}
                           </div>
-                        ))}
-                  </div>
-                ))}
-            </div>
+                        ))
+                    : item.codesPostaux.map((postal, index) => (
+                        <div
+                          className="suggestion"
+                          key={item.codesPostaux[index]}
+                          onClick={() => {
+                            onSearchInputValue(
+                              `${item.nom} - ${item.codesPostaux[index]}`
+                            );
+                          }}
+                          onKeyDown={() => {}}
+                          role="button"
+                          tabIndex="0"
+                        >
+                          {`${item.nom} - ${item.codesPostaux[index]}`}
+                        </div>
+                      ))}
+                </div>
+              ))}
           </div>
         </div>
       ) : (
