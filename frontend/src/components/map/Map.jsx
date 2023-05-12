@@ -7,8 +7,14 @@ import "./Map.css";
 
 const customIcon = L.icon({
   iconUrl: "./assets/Star.svg", // Replace with the path to your custom marker icon
-  iconSize: [25, 41], // Adjust the size as per your marker icon
+  iconSize: [58, 41], // Adjust the size as per your marker icon
   iconAnchor: [12, 41], // Adjust the anchor point if needed
+});
+
+const customIcon2 = L.icon({
+  iconUrl: "./assets/299087_marker_map_icon.png",
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
 });
 
 export default function Map({ coord, coordUndefined, savedCulture }) {
@@ -38,6 +44,7 @@ export default function Map({ coord, coordUndefined, savedCulture }) {
                   ? coord.fields.coordonnees_gps_lat_lon
                   : coord.fields.geocodage_xy
               }
+              icon={customIcon2}
             />
             {savedCulture.length > 0
               ? savedCulture.map((el) => {
