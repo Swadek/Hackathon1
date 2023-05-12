@@ -130,7 +130,11 @@ function Home({
         <RandomActivityCard randomActivity={randomActivity} />
       ) : null}
       {cultureIsLoaded && (
-        <Map coord={culture[cultureRandom]} coordUndefined={coordUndefined} />
+        <Map
+          coord={culture[cultureRandom]}
+          coordUndefined={coordUndefined}
+          savedCulture={savedCulture}
+        />
       )}
       {festival ? <FestivalCard festival={festival[cultureRandom]} /> : null}
     </div>
