@@ -96,8 +96,6 @@ function Home({
       .catch((error) => console.error(error.message));
   }, [communeSelectedAdd]);
 
-  console.log(festival);
-
   return (
     <div className="generalContainer">
       {foreCast

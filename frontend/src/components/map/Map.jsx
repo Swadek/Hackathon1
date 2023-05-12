@@ -41,7 +41,6 @@ export default function Map({ coord, coordUndefined, savedCulture }) {
             />
             {savedCulture.length > 0
               ? savedCulture.map((el) => {
-                  console.log(savedCulture);
                   return (
                     <div key={el.recordid}>
                       <Marker
