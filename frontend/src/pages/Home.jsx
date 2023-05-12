@@ -50,7 +50,6 @@ function Home({
   setCoordUndefined,
   coordUndefined,
   festival,
-  setFestival,
 }) {
   function RandomActivities() {
     setCultureRandom(Math.floor(Math.random() * culture.length));
@@ -77,15 +76,8 @@ function Home({
       .then((data) => setRandomActivity(data))
       .catch((error) => console.error(error.message));
   }, []);
-  useEffect(() => {
-    axios
-      .get(
-        `https://data.culture.gouv.fr/api/records/1.0/search/?dataset=festivals-global-festivals-_-pl&q=&rows=10000&refine.code_insee_commune=31555`
-      )
-      .then((data) => setFestival(data.data.records))
-      .catch((error) => console.error(error.message));
-  }, []);
-  console.log(festival);
+  // console.log(randomActivity);
+  // console.log(culture, cityDataSearch, savedCulture);
   return (
     <div>
       {foreCast
@@ -130,11 +122,7 @@ function Home({
         <RandomActivityCard randomActivity={randomActivity} />
       ) : null}
       {cultureIsLoaded && (
-        <Map
-          coord={culture[cultureRandom]}
-          coordUndefined={coordUndefined}
-          savedCulture={savedCulture}
-        />
+        <Map coord={culture[cultureRandom]} coordUndefined={coordUndefined} />
       )}
       {festival ? <FestivalCard festival={festival[cultureRandom]} /> : null}
     </div>
