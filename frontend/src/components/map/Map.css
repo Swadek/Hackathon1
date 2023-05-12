@@ -1,0 +1,13 @@
+.map-container {
+  height: 50vh;
+  width: 100%;
+  position: absolute;
+  top: 50vh;
+}
+
+.leaflet-container {
+  z-index: 0;
+  outline: none;
+  height: 100%;
+  width: 100%;
+}

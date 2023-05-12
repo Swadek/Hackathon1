@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Home from "./pages/Home";
 import "./reset.css";
 import "./App.css";
+import "./CSS/activityCard.css";
 
 function App() {
   const [culture, setCulture] = useState();
@@ -15,6 +16,11 @@ function App() {
   const [savedCulture, setSavedCulture] = useState([]);
   const [startX, setStartX] = useState(null);
   const [endX, setEndX] = useState(null);
+  const [foreCast, setForeCast] = useState();
+  const [festival, setFestival] = useState();
+  const [coordUndefined, setCoordUndefined] = useState([]);
+  const [inOut, setInOut] = useState(true);
+  const [actualWeather, setActualWeather] = useState(false);
 
   return (
     <div className="App">
@@ -37,6 +43,16 @@ function App() {
         setStartX={setStartX}
         endX={endX}
         setEndX={setEndX}
+        foreCast={foreCast}
+        setForeCast={setForeCast}
+        festival={festival}
+        setFestival={setFestival}
+        setCoordUndefined={setCoordUndefined}
+        coordUndefined={coordUndefined}
+        inOut={inOut}
+        setInOut={setInOut}
+        actualWeather={actualWeather}
+        setActualWeather={setActualWeather}
       />
     </div>
   );

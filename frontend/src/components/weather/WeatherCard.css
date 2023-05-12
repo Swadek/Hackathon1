@@ -1,21 +1,21 @@
 .city {
   margin: 8px auto;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
   width: 35%;
   border-radius: 50px;
   gap: 5px;
-  padding: 2px;
+  padding: 6px 2px;
   color: white;
 }
 
 .weatherContainer {
-  width: 340px;
+  width: 90%;
   margin: 16px auto;
   border-radius: 5px;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.6);
   padding: 4px;
   display: grid;
   grid-template: 1fr 1fr / 1fr 1fr;
@@ -56,4 +56,50 @@
 .weatherText {
   font-size: 1.4rem;
   color: white;
+}
+
+.cityName {
+  font-size: 1.2rem;
+}
+
+@media screen and (min-width: 768px) {
+  .city {
+    width: 20%;
+    gap: 8px;
+    padding: 12px 2px;
+  }
+  .cityName {
+    font-size: 1.6rem;
+  }
+
+  .weatherContainer {
+    width: 40%;
+    padding: 16px;
+    gap: 8px;
+  }
+
+  .windInfo img {
+    width: 48px;
+  }
+  .windInfo {
+    gap: 32px;
+  }
+
+  .weatherData img {
+    width: 64px;
+  }
+
+  .windSpeed,
+  .weatherText {
+    font-size: 1.8rem;
+  }
+
+  .weatherData {
+    gap: 24px;
+  }
+
+  .tempMin,
+  .tempMax {
+    font-size: 2.8rem;
+  }
 }

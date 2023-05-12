@@ -1,16 +1,32 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable react/button-has-type */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable react/prop-types */
 import React, { useEffect } from "react";
+// eslint-disable-next-line import/no-extraneous-dependencies
 import axios from "axios";
+import styled from "styled-components";
 import Activities from "../components/Activities";
-import RandomActivityCard from "../components/RandomActivityCard/RandomActivityCard";
+// import RandomActivityCard from "../components/RandomActivityCard/RandomActivityCard";
 import Weather from "../components/weather/Weather";
 import Searchbar from "../components/searchbar/Searchbar";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 // eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies
 import "primereact/resources/primereact.min.css";
+import "./Home.css";
+import weatherCode from "../utils";
+import Map from "../components/map/Map";
+import FestivalCard from "../components/FestivalCard";
+
+const BgImg = styled.div`
+  background: url(${({ url }) => url});
+  height: 50vh;
+  top: 0;
+  width: 100%;
+  position: absolute;
+  z-index: -1;
+`;
 
 function Home({
   culture,
@@ -23,7 +39,7 @@ function Home({
   setCityDataSearch,
   cultureIsLoaded,
   setCultureIsLoaded,
-  randomActivity,
+  // randomActivity,
   setRandomActivity,
   savedCulture,
   setSavedCulture,
@@ -31,13 +47,28 @@ function Home({
   setStartX,
   endX,
   setEndX,
+  foreCast,
+  setForeCast,
+  setCoordUndefined,
+  coordUndefined,
+  festival,
+  setFestival,
+  inOut,
+  setInOut,
+  actualWeather,
+  setActualWeather,
 }) {
   function RandomActivities() {
     setCultureRandom(Math.floor(Math.random() * culture.length));
+    setInOut(!inOut);
   }
   function SaveActivities() {
-    setSavedCulture([...savedCulture, culture[cultureRandom]]);
+    setSavedCulture([
+      ...savedCulture,
+      inOut ? culture[cultureRandom] : festival[cultureRandom],
+    ]);
     setCultureRandom(Math.floor(Math.random() * culture.length));
+    setInOut(!inOut);
   }
   useEffect(() => {
     axios
@@ -55,47 +86,95 @@ function Home({
       .get(`http://www.boredapi.com/api/activity/`)
       .then((data) => setRandomActivity(data))
       .catch((error) => console.error(error.message));
-  }, []);
-  console.log(randomActivity);
-  console.log(culture, cityDataSearch, savedCulture);
+  }, [communeSelectedAdd, cultureRandom]);
+  useEffect(() => {
+    axios
+      .get(
+        `https://data.culture.gouv.fr/api/records/1.0/search/?dataset=festivals-global-festivals-_-pl&q=&rows=10000&refine.code_insee_commune=${cityDataSearch[0]}`
+      )
+      .then((data) => setFestival(data.data.records))
+      .catch((error) => console.error(error.message));
+  }, [communeSelectedAdd]);
+
   return (
-    <div>
-      <Weather cityDataSearch={cityDataSearch} />
+    <div className="generalContainer">
+      {foreCast
+        ? weatherCode.map((el) => {
+            return el.code === foreCast.weather
+              ? (setActualWeather(el.weatherIsGood),
+                (<BgImg key={el.code} url={el.urlbg} />))
+              : null;
+          })
+        : null}
+
       <div className="SearchBar">
         <Searchbar
           setCommuneSelectedAdd={setCommuneSelectedAdd}
           communeSelectedAdd={communeSelectedAdd}
           setCityDataSearch={setCityDataSearch}
+          setCoordUndefined={setCoordUndefined}
         />
-
-        <div>
-          <ul>
-            {communeSelectedAdd.map((name) => (
-              <li key={name}>{name}</li>
-            ))}
-          </ul>
-        </div>
       </div>
-      {cultureIsLoaded ? (
+      <Weather
+        cityDataSearch={cityDataSearch}
+        foreCast={foreCast}
+        setForeCast={setForeCast}
+        setInOut={setInOut}
+      />
+      {cultureIsLoaded && festival ? (
         <div>
-          <Activities
-            culture={culture[cultureRandom]}
-            startX={startX}
-            setStartX={setStartX}
-            endX={endX}
-            setEndX={setEndX}
-            RandomActivities={() => RandomActivities()}
-            SaveActivities={() => SaveActivities()}
-          />
-          <button onClick={() => RandomActivities()}>Next</button>
-          <button onClick={() => SaveActivities()}>Save</button>
+          {!actualWeather ? (
+            <Activities
+              culture={culture[cultureRandom]}
+              startX={startX}
+              setStartX={setStartX}
+              endX={endX}
+              setEndX={setEndX}
+              RandomActivities={() => RandomActivities()}
+              SaveActivities={() => SaveActivities()}
+            />
+          ) : inOut ? (
+            <FestivalCard
+              festival={festival[cultureRandom]}
+              culture={culture[cultureRandom]}
+              startX={startX}
+              setStartX={setStartX}
+              endX={endX}
+              setEndX={setEndX}
+              RandomActivities={() => RandomActivities()}
+              SaveActivities={() => SaveActivities()}
+            />
+          ) : (
+            <Activities
+              culture={culture[cultureRandom]}
+              startX={startX}
+              setStartX={setStartX}
+              endX={endX}
+              setEndX={setEndX}
+              RandomActivities={() => RandomActivities()}
+              SaveActivities={() => SaveActivities()}
+            />
+          )}
+          <button className="buttons" onClick={() => RandomActivities()}>
+            Next
+          </button>
+          <button className="buttons" onClick={() => SaveActivities()}>
+            Save
+          </button>
         </div>
       ) : (
         <p>Loading</p>
       )}
-      {randomActivity ? (
+      {/* {randomActivity ? (
         <RandomActivityCard randomActivity={randomActivity} />
-      ) : null}
+      ) : null} */}
+      {cultureIsLoaded && (
+        <Map
+          coord={culture[cultureRandom]}
+          coordUndefined={coordUndefined}
+          savedCulture={savedCulture}
+        />
+      )}
     </div>
   );
 }

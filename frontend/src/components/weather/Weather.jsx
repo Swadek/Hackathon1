@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import WeatherCard from "./WeatherCard";
 
-function Weather({ cityDataSearch }) {
+function Weather({ cityDataSearch, foreCast, setForeCast }) {
   const apiKey = import.meta.env.VITE_APP_METEO_API_KEY;
-  const [foreCast, setForeCast] = useState();
+
   const [city, setCity] = useState();
 
   useEffect(() => {
@@ -21,7 +21,6 @@ function Weather({ cityDataSearch }) {
         console.error(err.message);
       });
   }, [cityDataSearch]);
-
   return foreCast && <WeatherCard city={city} foreCast={foreCast} />;
 }
 

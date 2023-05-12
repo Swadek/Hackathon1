@@ -34,6 +34,8 @@
     "axios": "^1.4.0",
     "dotenv": "^16.0.3",
     "primeflex": "^3.3.0",
+    "react-leaflet": "^4.2.1",
+    "primeicons": "^6.0.1",
     "primereact": "^9.3.1"
   }
 }
