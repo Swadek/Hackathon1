@@ -21,7 +21,6 @@ function Weather({ cityDataSearch, foreCast, setForeCast }) {
         console.error(err.message);
       });
   }, [cityDataSearch]);
-
   return foreCast && <WeatherCard city={city} foreCast={foreCast} />;
 }
 
